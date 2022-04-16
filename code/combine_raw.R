@@ -1,10 +1,14 @@
-library(tidyverse); library(magrittr)
-# take in arguments
+#!/usr/bin/env Rscript --vanilla
 
-input_file <- c("data/raw/likelihoodD_standardD_He-table.csv", 
-                "data/raw/likelihoodD_standardS_He-table.csv",
-                "data/raw/likelihoodS_standardD_He-table.csv",
-                "data/raw/likelihoodS_standardS_He-table.csv")
+# name: combine_raw.R
+# input: eight dataset by conditions from the two experiments
+# output: one dataset with coded conditions and preprocessed outcomes
+# notes: conditions were coded into variables diff_likelihood, diff_standard, and homosexual
+
+library(tidyverse); library(magrittr)
+
+input_file <- commandArgs(trailingOnly = TRUE)
+
 output_file <- "data/processed/casual_sex_sim.csv"
 
 # read file and combine
@@ -21,7 +25,7 @@ names(raw_tib) <- c("m_number", "m_likelihood", "f_likelihood",
                     "seed", "m_inpool", "f_inpool",
                     "m_exp", "f_exp", "m_partner", "f_partner")
 
-h# preprocessing the data
+# preprocessing the data
 raw_tib <- 
   raw_tib %>% 
     mutate(
