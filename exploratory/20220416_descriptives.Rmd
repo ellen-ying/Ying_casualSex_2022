@@ -2,7 +2,9 @@
 title: "20220416_descriptives"
 author: "Yurun (Ellen) Ying"
 date: "4/16/2022"
-output: github_document
+output: 
+  github_document:
+    html_preview: false
   
 ---
 
@@ -12,7 +14,23 @@ library(tidyverse); library(ggplot2); library(magrittr); library(here); library(
 
 # read file
 casual_tib <- here("data/processed/casual_sex_sim.csv") %>% 
-  read_csv()
+  read_csv() %>% 
+  mutate(
+    diff_likelihood = as_factor(diff_likelihood),
+    diff_standard = as_factor(diff_standard),
+    homosexual = as_factor(homosexual)
+  )
+
+# add variables for gender differences
+casual_tib <- casual_tib %>% 
+  mutate(
+    diff_inpool = m_inpool - f_inpool,
+    diff_outpool = m_outpool - f_outpool,
+    diff_exp_all = m_exp_all - f_exp_all,
+    diff_exp_ip = m_exp_ip - f_exp_ip,
+    diff_partner_all = m_partner_all - f_partner_all,
+    diff_partner_ip = m_partner_ip - f_partner_ip
+  )
 ```
 
 ## Overview
@@ -31,13 +49,12 @@ casual_tib <- here("data/processed/casual_sex_sim.csv") %>%
 
 ### Outcome variables
 
-- number of men and women who were in the mating pool `m_inpool` `f_inpool`
-- number of men and women who were out of the mating pool `m_outpool` ` f_outpool`
-- average number of short-term mating experiences of total populations of men and women `m_exp_all` `f_exp_all`
-- average number of short-term mating experiences of men and women in the pool `m_exp_ip` `f_exp_ip`
-- average number of short-term partners of total populations of men and women `m_partner_all` `f_partner_all`
-- average number of short-term partners of men and women in the pool `m_partner_ip` `f_partner_ip`
-
+- number of men and women who were in the mating pool `m_inpool` `f_inpool`; gender difference `diff_inpool`
+- number of men and women who were out of the mating pool `m_outpool` ` f_outpool`; gender difference `diff_outpool`
+- average number of short-term mating experiences of total populations of men and women `m_exp_all` `f_exp_all`; gender difference `diff_exp_all`
+- average number of short-term mating experiences of men and women in the pool `m_exp_ip` `f_exp_ip`; gender difference `diff_exp_ip`
+- average number of short-term partners of total populations of men and women `m_partner_all` `f_partner_all`; gender difference `diff_partner_all`
+- average number of short-term partners of men and women in the pool `m_partner_ip` `f_partner_ip`; gender difference `diff_partner_ip`
 
 ## Experiment 1: Experiment of heterosexual individuals
 
@@ -80,8 +97,8 @@ kable(e1_mean_tib)
   - When there was a gender difference in short-term mating standards, in-pool men had a higher average number of short-term mates than in-pool women. This was true no matter whether there was a gender difference in the likelihood of short-term mating.
   - This gender difference disappeared when there was no gender difference in short-term mating standards.
 
-### Distributions of the outcome variables
-- Number of men and women in the mating pool
+### Distributions
+- Number of heterosexual men and women in the mating pool
 ```{r e1_inpool_hist, fig.align='center', echo=FALSE}
 casual_tib %>% 
   filter(homosexual == 0) %>% 
@@ -116,8 +133,78 @@ casual_tib %>%
     strip.background = element_rect(fill = "#FFFFFF"))
 ```
 
-- Average number of short-term mating experiences of men and women in the mating pool
-```{r e1_exp_hist, fig.align='center', echo=FALSE}
+- Number of heterosexual men and women out of the mating pool
+```{r e1_outpool_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 0) %>% 
+  select(diff_likelihood, diff_standard, m_outpool, f_outpool) %>% 
+  pivot_longer(m_outpool:f_outpool,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Number of Heterosexual Men and\nWomen out of the Mating Pool"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term mating experiences of heterosexual men and women from the whole population
+```{r e1_expall_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 0) %>% 
+  select(diff_likelihood, diff_standard, m_exp_all, f_exp_all) %>% 
+  pivot_longer(m_exp_all:f_exp_all,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Average Number of Short-term Mating\nExperiences of All Heterosexual Men and Women"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term mating experiences of heterosexual men and women in the mating pool
+```{r e1_expip_hist, fig.align='center', echo=FALSE}
 casual_tib %>% 
   filter(homosexual == 0) %>% 
   select(diff_likelihood, diff_standard, m_exp_ip, f_exp_ip) %>% 
@@ -151,8 +238,44 @@ casual_tib %>%
     strip.background = element_rect(fill = "#FFFFFF"))
 ```
 
-- Average number of short-term partners of men and women in the mating pool
-```{r e1_partner_hist, fig.align='center', echo=FALSE}
+- Average number of short-term partners of heterosexual men and women from the whole population
+```{r e1_partnerall_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 0) %>% 
+  select(diff_likelihood, diff_standard, 
+         m_partner_all, f_partner_all) %>% 
+  pivot_longer(m_partner_all:f_partner_all,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Average Number of Short-term Partners of\nAll Heterosexual Men and Women"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.7),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term partners of heterosexual men and women in the mating pool
+```{r e1_partnerip_hist, fig.align='center', echo=FALSE}
 casual_tib %>% 
   filter(homosexual == 0) %>% 
   select(diff_likelihood, diff_standard, 
@@ -187,6 +310,104 @@ casual_tib %>%
     strip.background = element_rect(fill = "#FFFFFF"))
 ```
 
+### Gender differences
+
+- Number of heterosexual men and women in the mating pool
+```{r e1_inpool_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 0) %>% 
+  select(diff_likelihood, diff_standard, diff_inpool) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_inpool, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Number of\nHeterosexual Men and Women in the Mating Pool"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
+- Average number of short-term mating experiences of heterosexual men and women in the mating pool
+```{r e1_expip_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 0) %>% 
+  select(diff_likelihood, diff_standard, diff_exp_ip) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_exp_ip, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Average Number of\nShort-term Experiences Among\nIn-pool Heterosexual Men and Women"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
+- Average number of short-term partners of heterosexual men and women in the mating pool
+```{r e1_partnerip_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 0) %>% 
+  select(diff_likelihood, diff_standard, diff_partner_ip) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_partner_ip, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Average Number of\nShort-term Partners Among\nIn-pool Heterosexual Men and Women"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
 ## Experiment 2: Experiment of gay men and lesbian women
 
 ### Means of the outcome variables
@@ -215,3 +436,388 @@ e2_mean_tib <-
 kable(e2_mean_tib)
 ```
 
+- **Number of men and women in/out of the mating pool**
+  - When there were no gender differences in short-term mating likelihood or standards, there was no gender difference in the number of men and women in/out of the mating pool. 
+  - There were more gay men than lesbian women in the mating pool, and less men than women out of the mating pool when there was a gender difference in at least one of the two parameters.
+- **Average number of short-term mating experiences of all/in-pool men and women**
+  - When there were no gender differences in short-term mating likelihood or standards, there was no gender difference in the average number of short-term mating experiences, regardless of whether the average was taken from the whole population or the in-pool men and women only.
+  - Gay men had a higher number of short-term mating experiences than lesbian women on average when there was a gender difference in at least one of the two parameters. This was true regardless of whether the average was taken from the whole population or the in-pool men and women only.
+- **Average number of short-term partners of all/in-pool men and women**
+  - When there were no gender differences in short-term mating likelihood or standards, there was no gender difference in the average number of short-term partners, regardless of whether the average was taken from the whole population or the in-pool men and women only.
+  - Gay men had a higher number of short-term partners than lesbian women on average when there was a gender difference in at least one of the two parameters. This was true regardless of whether the average was taken from the whole population or the in-pool men and women only.
+  
+### Distributions 
+- Number of gay men and lesbian women in the mating pool
+```{r e2_inpool_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, m_inpool, f_inpool) %>% 
+  pivot_longer(m_inpool:f_inpool,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Number of Gay Men and\nLesbian Women in the Mating Pool"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Number of gay men and lesbian women out of the mating pool
+```{r e2_outpool_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, m_outpool, f_outpool) %>% 
+  pivot_longer(m_outpool:f_outpool,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Number of Gay Men and\nLesbian Women out of the Mating Pool"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term mating experiences of gay men and lesbian women from the whole population
+```{r e2_expall_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, m_exp_all, f_exp_all) %>% 
+  pivot_longer(m_exp_all:f_exp_all,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Average Number of Short-term Mating\nExperiences of All Gay Men and Lesbian Women"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term mating experiences of gay men and lesbian women in the mating pool
+```{r e2_expip_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, m_exp_ip, f_exp_ip) %>% 
+  pivot_longer(m_exp_ip:f_exp_ip,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Average Number of Short-term Mating\nExperiences of In-pool Gay Men and Lesbian Women"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term partners of gay men and lesbian women from the whole population
+```{r e2_partnerall_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, 
+         m_partner_all, f_partner_all) %>% 
+  pivot_longer(m_partner_all:f_partner_all,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Average Number of Short-term Partners of\nAll Gay Men and Lesbian Women"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.7),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+- Average number of short-term partners of gay men and lesbian women in the mating pool
+```{r e2_partnerip_hist, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, 
+         m_partner_ip, f_partner_ip) %>% 
+  pivot_longer(m_partner_ip:f_partner_ip,
+               names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(x = value, fill = variable)) +
+  geom_histogram(bins = 30, alpha = 0.3, size = 0.2,
+                 color = "#e9ecef", position = 'identity') +
+  scale_fill_discrete(
+    name = "Gender",
+    labels = c("Women", "Men")) +
+  labs(
+    x = "Number of individuals", 
+    y = "Frequency",
+    title = "Average Number of Short-term Partners of\nIn-pool Gay Men and Lesbian Women"
+       ) +
+  facet_grid(
+    diff_standard ~ diff_likelihood,
+    labeller = labeller(
+        diff_likelihood = c(
+          `0` = "No gender difference\nin mating likelihood", 
+          `1` = "Gender difference\nin mating likelihood"),
+        diff_standard = c(
+          `0` = "No gender difference\nin mating standards", 
+          `1` = "Gender difference\nin mating standards")
+    )
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.7),
+    strip.background = element_rect(fill = "#FFFFFF"))
+```
+
+
+### Gender differences
+
+- Number of gay men and lesbian women in the mating pool
+```{r e2_inpool_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, diff_inpool) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_inpool, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Number of\nGay Men and Lesbian Women in the Mating Pool"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
+- Average number of short-term mating experiences of gay men and lesbian women from the whole population
+```{r e2_expall_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, diff_exp_all) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_exp_all, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Average Number of\nShort-term Experiences Among\nAll Gay Men and Lesbian Women"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
+- Average number of short-term mating experiences of gay men and lesbian women in the mating pool
+```{r e2_expip_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, diff_exp_ip) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_exp_ip, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Average Number of\nShort-term Experiences Among\nIn-pool Gay Men and Lesbian Women"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
+- Average number of short-term partners of gay men and lesbian women from the whole population
+```{r e2_partnerall_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, diff_partner_all) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_partner_all, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Average Number of\nShort-term Parters Among\nAll Gay Men and Lesbian Women"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
+
+- Average number of short-term partners of gay men and lesbian women in the mating pool
+```{r e2_partnerip_line, fig.align='center', echo=FALSE}
+casual_tib %>% 
+  filter(homosexual == 1) %>% 
+  select(diff_likelihood, diff_standard, diff_partner_ip) %>% 
+  ggplot(aes(
+    x = diff_likelihood, y = diff_partner_ip, group = diff_standard,
+    color = diff_standard, fill = diff_standard)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  stat_summary(fun = mean, geom = "line",
+               size = 0.4, linetype = "dashed") +
+  scale_x_discrete(
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_fill_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  scale_color_discrete(
+    name = "Short-term mating\nstandards",
+    labels = c("No gender\ndifference", "Gender\ndifference")) +
+  labs(
+    x = "Short-term mating likelihood", 
+    y = "Gender difference\n(men - women)",
+    title = "Gender Difference in the Average Number of\nShort-term Partners Among\nIn-pool Gay Men and Lesbian Women"
+       ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.key.height = unit(1.5, units = "lines"))
+```
