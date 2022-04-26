@@ -1,0 +1,117 @@
+---
+title: "20220426_main_plot_t_test"
+author: "Yurun (Ellen) Ying"
+date: "4/26/2022"
+output: 
+  github_document:
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+# load libraries
+library(tidyverse); library(ggplot2); library(wesanderson); library(magrittr); library(here); library(knitr); library(broom)
+
+# read file
+casual_tib <- here("data/processed/casual_sex_sim.csv") %>% 
+  read_csv() %>% 
+  mutate(
+    diff_likelihood = as_factor(diff_likelihood),
+    diff_standard = as_factor(diff_standard),
+    homosexual = as_factor(homosexual)
+  )
+```
+
+## Main plots
+- Violin plots of the diff x diff condition
+	- grouped by gender
+	- paneled by experiments
+	- separate for two dependent variables: avg num of experiences (all), avg num of partners (all)
+
+```{r violin_exp}
+casual_tib %>% 
+  filter(diff_likelihood == 1, diff_standard == 1) %>% 
+  select(homosexual, m_exp_all, f_exp_all) %>% 
+  pivot_longer(c(m_exp_all, f_exp_all), values_to = "exp_all",
+               names_to = "gender", names_pattern = "(.)_exp_all") %>% 
+  ggplot(aes(x = gender, y = exp_all)) +
+  geom_violin(aes(fill = gender)) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  scale_fill_discrete(
+    type = wes_palette("Darjeeling2", 2, type = "discrete"),
+    name = "", labels = c("Women", "Men")
+  ) +
+  labs(x = "", y = "Average number of\nshort-term mating experiences",
+       title = " Main plot 1: violin plot of average number of\nshort-term mating experiences") +
+  facet_wrap(
+    ~ homosexual,
+    labeller = labeller(
+      homosexual = c(
+        `0` = "Experiment 1\nHeterosexual individuals",
+        `1` = "Experiment 2\nGay men and lesbian women")
+      )) +
+  theme_minimal() +
+  theme(
+    axis.line = element_line(size = 0.3),
+    axis.ticks.y = element_line(size = 0.3),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    panel.spacing = unit(0, "npc"),
+    strip.text = element_text(size = 10)
+    )
+    
+```
+
+```{r violin_partner}
+casual_tib %>% 
+  filter(diff_likelihood == 1, diff_standard == 1) %>% 
+  select(homosexual, m_partner_all, f_partner_all) %>% 
+  pivot_longer(c(m_partner_all, f_partner_all), values_to = "partner_all",
+               names_to = "gender", names_pattern = "(.)_partner_all") %>% 
+  ggplot(aes(x = gender, y = partner_all)) +
+  geom_violin(aes(fill = gender)) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  coord_cartesian(ylim = c(0, 3)) +
+  scale_fill_discrete(
+    type = wes_palette("Darjeeling2", 2, type = "discrete"),
+    name = "", labels = c("Women", "Men")
+  ) +
+  labs(x = "", y = "Average number of\nshort-term patners",
+       title = " Main plot 2: violin plot of average\nnumber of short-term partners") +
+  facet_wrap(
+    ~ homosexual,
+    labeller = labeller(
+      homosexual = c(
+        `0` = "Experiment 1\nHeterosexual individuals",
+        `1` = "Experiment 2\nGay men and lesbian women")
+      )) +
+  theme_minimal() +
+  theme(
+    axis.line = element_line(size = 0.3),
+    axis.ticks.y = element_line(size = 0.3),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    panel.spacing = unit(0, "npc"),
+    strip.text = element_text(size = 10)
+    )
+```
+
+## T-tests
+- Independent samples *t*-test between men and women, separate for conditions and experiments
+- Output into a large table
+
+```{r t_exp_all}
+# t test by groups for exp_all variable
+casual_tib %>% 
+  unite(homosexual, diff_likelihood, diff_standard,
+              col = "condition_hs_lh_sd", sep = "_") %>% 
+  pivot_longer(c(m_exp_all, f_exp_all), values_to = "exp_all",
+               names_to = "gender", names_pattern = "(.)_exp_all") %>% 
+  select(condition_hs_lh_sd, gender, exp_all) %>% 
+  nest_by(condition_hs_lh_sd) %>% 
+  mutate(t.test(exp_all ~ gender, data = data) %>% tidy()) %>% 
+  select(condition_hs_lh_sd, statistic, p.value, parameter) %>% 
+  kable()
+```
+
