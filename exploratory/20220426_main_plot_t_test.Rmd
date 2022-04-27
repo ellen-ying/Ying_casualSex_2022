@@ -156,10 +156,12 @@ casual_d <-
     exp_ip.d = cohens_d(exp_ip ~ gender, data = data) %>% pull(Cohens_d),
     partner_all.d = cohens_d(partner_all ~ gender, data = data) %>% pull(Cohens_d),
     partner_ip.d = cohens_d(partner_ip ~ gender, data = data) %>% pull(Cohens_d)
-    )
+    ) %>% 
+  select(-data)
 
 # combine the descriptives, test results, and effect size
-full_join(casual_des, casual_t_test, casual_d, by = "homosexual_dlikelihood_dstandard") %>% 
+full_join(casual_des, casual_t_test, by = "homosexual_dlikelihood_dstandard") %>% 
+  full_join(., casual_d, by = "homosexual_dlikelihood_dstandard") %>% 
   kable()
 ```
 
