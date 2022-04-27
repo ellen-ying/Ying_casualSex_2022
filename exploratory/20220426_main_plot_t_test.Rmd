@@ -9,7 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 # load libraries
-library(tidyverse); library(ggplot2); library(wesanderson); library(magrittr); library(here); library(knitr); library(broom)
+library(tidyverse); library(ggplot2); library(wesanderson); library(magrittr); library(here); library(knitr); library(broom); library(effectsize)
 
 # read file
 casual_tib <- here("data/processed/casual_sex_sim.csv") %>% 
@@ -99,19 +99,67 @@ casual_tib %>%
 
 ## T-tests
 - Independent samples *t*-test between men and women, separate for conditions and experiments
-- Output into a large table
+- Output into tables with descriptives and test results, separate by variables
 
-```{r t_exp_all}
-# t test by groups for exp_all variable
-casual_tib %>% 
+```{r t_all_var}
+# create a long tibble
+casual_long <- 
+  casual_tib %>%
   unite(homosexual, diff_likelihood, diff_standard,
-              col = "condition_hs_lh_sd", sep = "_") %>% 
-  pivot_longer(c(m_exp_all, f_exp_all), values_to = "exp_all",
-               names_to = "gender", names_pattern = "(.)_exp_all") %>% 
-  select(condition_hs_lh_sd, gender, exp_all) %>% 
-  nest_by(condition_hs_lh_sd) %>% 
-  mutate(t.test(exp_all ~ gender, data = data) %>% tidy()) %>% 
-  select(condition_hs_lh_sd, statistic, p.value, parameter) %>% 
+        col = "homosexual_dlikelihood_dstandard", sep = "_") %>% 
+  pivot_longer(-c(seed, homosexual_dlikelihood_dstandard), 
+               names_to = c("gender", ".value"), 
+               names_pattern = "(.)_(.*)"
+  )
+
+# descriptives
+casual_des <- 
+  casual_long %>% 
+  group_by(homosexual_dlikelihood_dstandard, gender) %>% 
+  summarise(across(inpool:partner_ip, 
+                   list(mean = mean, sd = sd),
+                   .names = "{.col}.{.fn}")) %>% 
+  pivot_wider(names_from = gender, 
+              values_from = -c(homosexual_dlikelihood_dstandard, gender),
+              names_glue = "{gender}_{.value}")
+
+# t test by groups for exp_all variable
+casual_t_test <- 
+  casual_long %>% 
+  nest_by(homosexual_dlikelihood_dstandard) %>% 
+  mutate(
+    inpool = t.test(inpool ~ gender, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    outpool = t.test(outpool ~ gender, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    exp_all = t.test(exp_all ~ gender, data = data) %>% tidy() %>% 
+      # somehow the map function doesn't work here and I wonder why...
+      select(statistic, p.value, parameter),
+    exp_ip = t.test(exp_ip ~ gender, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    partner_all = t.test(partner_all ~ gender, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    partner_ip = t.test(partner_ip ~ gender, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter)
+    ) %>% 
+  select(-data) %>% 
+  unnest(cols = -homosexual_dlikelihood_dstandard, names_sep = ".")
+
+# effect size
+casual_d <- 
+  casual_long %>% 
+  nest_by(homosexual_dlikelihood_dstandard) %>% 
+  mutate(
+    inpool.d = cohens_d(inpool ~ gender, data = data) %>% pull(Cohens_d),
+    outpool.d = cohens_d(outpool ~ gender, data = data) %>% pull(Cohens_d),
+    exp_all.d = cohens_d(exp_all ~ gender, data = data) %>% pull(Cohens_d),
+    exp_ip.d = cohens_d(exp_ip ~ gender, data = data) %>% pull(Cohens_d),
+    partner_all.d = cohens_d(partner_all ~ gender, data = data) %>% pull(Cohens_d),
+    partner_ip.d = cohens_d(partner_ip ~ gender, data = data) %>% pull(Cohens_d)
+    )
+
+# combine the descriptives, test results, and effect size
+full_join(casual_des, casual_t_test, casual_d, by = "homosexual_dlikelihood_dstandard") %>% 
   kable()
 ```
 
