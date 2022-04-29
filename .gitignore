@@ -5,4 +5,4 @@
 .DS_Store
 */.DS_Store
 data/processed/casual_sex_sim.csv
-submission/manuscript.Rmd
+submission/
