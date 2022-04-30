@@ -160,8 +160,10 @@ casual_d <-
   select(-data)
 
 # combine the descriptives, test results, and effect size
-full_join(casual_des, casual_t_test, by = "homosexual_dlikelihood_dstandard") %>% 
-  full_join(., casual_d, by = "homosexual_dlikelihood_dstandard") %>% 
-  kable()
-```
+des_t_d <- 
+  full_join(casual_des, casual_t_test, by = "homosexual_dlikelihood_dstandard") %>% 
+  full_join(., casual_d, by = "homosexual_dlikelihood_dstandard") 
 
+# display the results 
+des_t_d %>% kable()
+```

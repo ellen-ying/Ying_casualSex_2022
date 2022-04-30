@@ -155,9 +155,12 @@ casual_d <-
   select(-data)
 
 # combine the descriptives, test results, and effect size
-full_join(casual_des, casual_t_test, by = "homosexual_dlikelihood_dstandard") %>% 
-  full_join(., casual_d, by = "homosexual_dlikelihood_dstandard") %>% 
-  kable()
+des_t_d <- 
+  full_join(casual_des, casual_t_test, by = "homosexual_dlikelihood_dstandard") %>% 
+  full_join(., casual_d, by = "homosexual_dlikelihood_dstandard") 
+
+# display the results 
+des_t_d %>% kable()
 ```
 
 | homosexual_dlikelihood_dstandard | f_inpool.mean | m_inpool.mean | f_inpool.sd | m_inpool.sd | f_outpool.mean | m_outpool.mean | f_outpool.sd | m_outpool.sd | f_exp_all.mean | m_exp_all.mean | f_exp_all.sd | m_exp_all.sd | f_exp_ip.mean | m_exp_ip.mean | f_exp_ip.sd | m_exp_ip.sd | f_partner_all.mean | m_partner_all.mean | f_partner_all.sd | m_partner_all.sd | f_partner_ip.mean | m_partner_ip.mean | f_partner_ip.sd | m_partner_ip.sd | inpool.statistic | inpool.p.value | inpool.parameter | outpool.statistic | outpool.p.value | outpool.parameter | exp_all.statistic | exp_all.p.value | exp_all.parameter | exp_ip.statistic | exp_ip.p.value | exp_ip.parameter | partner_all.statistic | partner_all.p.value | partner_all.parameter | partner_ip.statistic | partner_ip.p.value | partner_ip.parameter |    inpool.d |  outpool.d |  exp_all.d |   exp_ip.d | partner_all.d | partner_ip.d |
