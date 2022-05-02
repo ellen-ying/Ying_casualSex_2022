@@ -1,0 +1,137 @@
+---
+title: "20220430_hetero_vs_gay"
+author: "Yurun (Ellen) Ying"
+date: "4/30/2022"
+output: 
+  github_document:
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+# load libraries
+library(tidyverse); library(ggplot2); library(wesanderson); library(magrittr); library(here); library(knitr); library(broom); library(effectsize)
+
+# read file
+casual_tib <- here("data/processed/casual_sex_sim.csv") %>% 
+  read_csv() %>% 
+  mutate(
+    diff_likelihood = as_factor(diff_likelihood),
+    diff_standard = as_factor(diff_standard),
+    homosexual = as_factor(homosexual)
+  )
+```
+
+## Plots
+- Violin plots of the diff x diff condition
+	- grouped by sexual orientation
+	- paneled by dependent variables: avg num of experiences (all), avg num of partners (all)
+
+```{r violin_plot, fig.height=8, fig.width=5}
+y_lab <- labeller(
+      variable = c(
+        `exp_all` = "Average number of\nshort-term mating experiences",
+        `partner_all` = "Average number of\nshort-term patners"))
+
+casual_tib %>% 
+  filter(diff_likelihood == 1, diff_standard == 1) %>% 
+  select(homosexual, m_exp_all, m_partner_all) %>% 
+  pivot_longer(c(m_exp_all, m_partner_all), values_to = "value",
+               names_to = "variable", names_pattern = "m_(.*)") %>% 
+  ggplot(aes(x = homosexual, y = value)) +
+  geom_violin(aes(fill = homosexual)) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  scale_fill_discrete(
+    type = wes_palette("Darjeeling2", 2, type = "discrete"),
+    name = "", labels = c("Heterosexual men", "Gay men")
+  ) +
+  labs(x = "", y = NULL,
+       title = " Violin plot of average number of short-term mating\nexperiences and  short-term mates, comparing\nheterosexualand gay men") +
+  facet_wrap(
+    ~ variable, ncol = 1, scales = "free",
+    strip.position = "left",
+    labeller = y_lab
+    ) +
+  theme_minimal() +
+  theme(
+    axis.line = element_line(size = 0.3),
+    axis.ticks.y = element_line(size = 0.3),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    panel.spacing = unit(0.5, "line"),
+    strip.text = element_text(size = 11),
+    strip.placement = "outside",
+    legend.position = "bottom",
+    legend.box.spacing = unit(0.1, "line")
+    )
+    
+```
+
+## T-tests
+- Independent samples *t*-test between heterosexual and gay men on all outcome variables, separate for conditions
+- Output into tables with descriptives and test results, separate by variables
+
+```{r t_all_var}
+# create a long tibble
+casual_long <- 
+  casual_tib %>%
+  unite(diff_likelihood, diff_standard,
+        col = "dlikelihood_dstandard", sep = "_") %>% 
+  select(-c(seed, starts_with("f_")))
+
+# descriptives
+casual_des <- 
+  casual_long %>% 
+  group_by(dlikelihood_dstandard, homosexual) %>% 
+  summarise(across(m_inpool:m_partner_ip, 
+                   list(mean = mean, sd = sd),
+                   .names = "{.fn}.{.col}"),
+            .groups = "keep") %>% 
+  pivot_wider(names_from = homosexual, 
+              values_from = -c(dlikelihood_dstandard, homosexual),
+              names_glue = "{.value}_{homosexual}")
+
+# t test by groups for exp_all variable
+casual_t_test <- 
+  casual_long %>% 
+  nest_by(dlikelihood_dstandard) %>% 
+  mutate(
+    m_inpool = t.test(m_inpool ~ homosexual, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    m_outpool = t.test(m_outpool ~ homosexual, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    m_exp_all = t.test(m_exp_all ~ homosexual, data = data) %>% tidy() %>% 
+      # somehow the map function doesn't work here and I wonder why...
+      select(statistic, p.value, parameter),
+    m_exp_ip = t.test(m_exp_ip ~ homosexual, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    m_partner_all = t.test(m_partner_all ~ homosexual, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter),
+    m_partner_ip = t.test(m_partner_ip ~ homosexual, data = data) %>% tidy() %>% 
+      select(statistic, p.value, parameter)
+    ) %>% 
+  select(-data) %>% 
+  unnest(cols = -dlikelihood_dstandard, names_sep = ".")
+
+# effect size
+casual_d <- 
+  casual_long %>% 
+  nest_by(dlikelihood_dstandard) %>% 
+  mutate(
+    m_inpool.d = cohens_d(m_inpool ~ homosexual, data = data) %>% pull(Cohens_d),
+    m_outpool.d = cohens_d(m_outpool ~ homosexual, data = data) %>% pull(Cohens_d),
+    m_exp_all.d = cohens_d(m_exp_all ~ homosexual, data = data) %>% pull(Cohens_d),
+    m_exp_ip.d = cohens_d(m_exp_ip ~ homosexual, data = data) %>% pull(Cohens_d),
+    m_partner_all.d = cohens_d(m_partner_all ~ homosexual, data = data) %>% pull(Cohens_d),
+    m_partner_ip.d = cohens_d(m_partner_ip ~ homosexual, data = data) %>% pull(Cohens_d)
+    ) %>% 
+  select(-data)
+
+# combine the descriptives, test results, and effect size
+des_t_d <- 
+  full_join(casual_des, casual_t_test, by = "dlikelihood_dstandard") %>% 
+  full_join(., casual_d, by = "dlikelihood_dstandard") 
+
+# display the results 
+des_t_d %>% kable()
+```
