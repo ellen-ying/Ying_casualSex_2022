@@ -1,0 +1,62 @@
+#!/usr/bin/env Rscript --vanilla
+
+# name: plot_men_vs_women.R
+# input: data/processed/casual_sex_sim.csv
+# output: submission/figures/fig1_men_vs_women.pdf
+# notes: none
+
+# load libraries
+library(tidyverse); library(ggplot2); library(wesanderson); library(magrittr); library(here); library(knitr); library(broom); library(effectsize)
+
+# read file
+casual_tib <- here("data/processed/casual_sex_sim.csv") %>% 
+  read_csv() %>% 
+  mutate(
+    diff_likelihood = as_factor(diff_likelihood),
+    diff_standard = as_factor(diff_standard),
+    homosexual = as_factor(homosexual)
+  )
+
+y_lab <- labeller(
+  homosexual = c(
+    `0` = "Experiment 1\nHeterosexual individuals",
+    `1` = "Experiment 2\nGay men and lesbian women"),
+  variable = c(
+    `exp_all` = "Average number of\nshort-term mating experiences",
+    `partner_all` = "Average number of\nshort-term mates")
+  )
+
+casual_tib %>% 
+  filter(diff_likelihood == 1, diff_standard == 1) %>% 
+  select(homosexual, m_exp_all, f_exp_all, m_partner_all, f_partner_all) %>% 
+  pivot_longer(c(m_exp_all, f_exp_all, m_partner_all, f_partner_all), 
+               values_to = "value", names_to = c("gender", "variable"),
+               names_pattern = "(.)_(.*)") %>% 
+  ggplot(aes(x = gender, y = value)) +
+  geom_violin(aes(fill = gender)) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  scale_fill_discrete(
+    type = wes_palette("Darjeeling2", 2, type = "discrete"),
+    name = "", labels = c("Women", "Men")
+  ) +
+  scale_y_continuous(limits = c(0, NA), breaks = seq(0, 4, by = 1)) +
+  labs(x = "", y = NULL) +
+  facet_grid(
+    variable ~ homosexual, scales = "free_y",
+    switch = "y", labeller = y_lab) +
+  theme_minimal() +
+  theme(
+    axis.line = element_line(size = 0.3),
+    axis.ticks.y = element_line(size = 0.3),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    panel.spacing.x = unit(0, "line"),
+    panel.spacing.y = unit(1, "line"),
+    strip.text = element_text(size = 11),
+    strip.placement = "outside",
+    legend.position = "bottom",
+    legend.box.spacing = unit(0, "npc")
+  )
+
+ggsave("submission/figures/fig1_men_vs_women.pdf", width = 5, height = 8)

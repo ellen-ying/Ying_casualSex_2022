@@ -33,7 +33,7 @@ casual_des <-
   group_by(dlikelihood_dstandard, homosexual) %>% 
   summarise(across(m_inpool:m_partner_ip, 
                    list(mean = mean, sd = sd),
-                   .names = "{.fn}.{.col}"),
+                   .names = "{.col}.{.fn}"),
             .groups = "keep") %>% 
   pivot_wider(names_from = homosexual, 
               values_from = -c(dlikelihood_dstandard, homosexual),

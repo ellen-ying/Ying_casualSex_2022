@@ -21,5 +21,17 @@ data/processed/compare_hetero_gay_men.csv : code/compare_hetero_gay_men.R\
 data/processed/casual_sex_sim.csv
 	$^
 
-submission/manuscript.pdf : data/processed/des_and_test_result.csv
+submission/figures/fig1_men_vs_women.pdf : code/plot_men_vs_women.R\
+data/processed/casual_sex_sim.csv
+	code/plot_men_vs_women.R
+
+submission/figures/fig2_hetero_vs_gay_men.pdf : code/plot_hetero_vs_gay_men.R\
+data/processed/casual_sex_sim.csv
+	code/plot_hetero_vs_gay_men.R
+
+submission/manuscript.pdf : submission/manuscript.Rmd\
+data/processed/des_and_test_result.csv\
+data/processed/compare_hetero_gay_men.csv\
+submission/figures/fig1_men_vs_women.pdf\
+submission/figures/fig2_hetero_vs_gay_men.pdf
 	R -e "rmarkdown::render('submission/manuscript.Rmd')"
