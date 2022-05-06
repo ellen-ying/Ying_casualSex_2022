@@ -2,6 +2,9 @@
 # output : dependencies
 # (tab) rule
 
+README.md : README.Rmd
+	R -e "rmarkdown::render('README.Rmd')"
+
 data/processed/casual_sex_sim.csv : code/combine_raw.R\
 data/raw/likelihoodD_standardD_He-table.csv\
 data/raw/likelihoodD_standardS_He-table.csv\

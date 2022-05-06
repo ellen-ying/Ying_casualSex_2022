@@ -1,0 +1,42 @@
+---
+title: "ABM simulating short-term mating behaviors"
+author: "Yurun (Ellen) Ying"
+date: "5/6/2022"
+output: 
+  github_document:
+    html_preview: true
+---
+
+## Description
+By using a spatial agent-based model, the present study investigated we investigated whether men and women's different mating preferences resulted in any gender differences in short-term mating behaviors, and if they did, under what circumstances.
+
+```{r library_calls, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(here)
+library(broom)
+library(effectsize)
+library(ggplot2)
+library(rmarkdown)
+library(knitr)
+library(kableExtra)
+```
+
+
+### Dependencies:
+- Netlogo version 6.2.1
+- `r R.version.string`
+  - `tidyverse` (v. `r packageVersion("tidyverse")`)
+  - `here` (v. `r packageVersion("here")`)
+  - `broom` (v. `r packageVersion("broom")`)
+  - `effectsize` (v. `r packageVersion("effectsize")`)
+  - `ggplot2` (v. `r packageVersion("ggplot2")`)
+  - `rmarkdown` (v. `r packageVersion("rmarkdown")`)
+  - `knitr` (v. `r packageVersion("knitr")`)
+  - `kableExtra` (v. `r packageVersion("kableExtra")`)
+
+
+### My computer
+
+```{r sessioninfo, echo=FALSE}
+sessionInfo()
+```
