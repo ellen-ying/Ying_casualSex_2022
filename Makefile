@@ -32,10 +32,10 @@ submission/figures/fig2_hetero_vs_gay_men.pdf : code/plot_hetero_vs_gay_men.R\
 data/processed/casual_sex_sim.csv
 	code/plot_hetero_vs_gay_men.R
 
-submission/manuscript.pdf : submission/manuscript.Rmd\
+submission/manuscript.* : submission/manuscript.Rmd\
 data/processed/des_and_test_result.csv\
 data/processed/compare_hetero_gay_men.csv\
 submission/figures/fig1_men_vs_women.pdf\
 submission/figures/fig2_hetero_vs_gay_men.pdf\
 submission/reference.bib
-	R -e "rmarkdown::render('submission/manuscript.Rmd')"
+	R -e "rmarkdown::render('submission/manuscript.Rmd', output_format = 'all', output_options = list())"
