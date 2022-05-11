@@ -6,10 +6,16 @@
 # notes: none
 
 # load libraries
-library(tidyverse); library(ggplot2); library(wesanderson); library(magrittr); library(here); library(knitr); library(broom); library(effectsize)
+library(tidyverse); library(ggplot2); library(wesanderson); library(here)
+
+args <- commandArgs(trailingOnly = TRUE)
+#args <- c("data/processed/casual_sex_sim.csv", "submission/figures/fig2_hetero_vs_gay_men.pdf")
+
+input_file <- args[1]
+output_file <- args[2]
 
 # read file
-casual_tib <- here("data/processed/casual_sex_sim.csv") %>% 
+casual_tib <- here(input_file) %>% 
   read_csv() %>% 
   mutate(
     diff_likelihood = as_factor(diff_likelihood),
@@ -17,10 +23,20 @@ casual_tib <- here("data/processed/casual_sex_sim.csv") %>%
     homosexual = as_factor(homosexual)
   )
 
+# construct facet label
+facet_label <- 
+  tibble(
+    label = c("(A)", "(B)"),
+    variable = c("exp_all", "partner_all"),
+    x = 0.5
+  ) %>% 
+  mutate(y = ifelse(variable == "exp_all", 4, 2.3))
+
+# construct y-axis label
 y_lab <- labeller(
   variable = c(
     `exp_all` = "Average number of\nshort-term mating experiences",
-    `partner_all` = "Average number of\nshort-term mates"))
+    `partner_all` = "Average number of short-term mates"))
 
 casual_tib %>% 
   filter(diff_likelihood == 1, diff_standard == 1) %>% 
@@ -31,6 +47,9 @@ casual_tib %>%
   geom_violin(aes(fill = homosexual)) +
   stat_summary(fun = "mean", geom = "point") +
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  geom_text(
+    data = facet_label, aes(label = label, x = x, y = y), hjust = 0, fontface = 2
+    ) +
   scale_fill_discrete(
     type = wes_palette("Darjeeling2", 2, type = "discrete"),
     name = "", labels = c("Heterosexual men", "Gay men")
@@ -38,7 +57,7 @@ casual_tib %>%
   scale_y_continuous(limits = c(0, NA), breaks = seq(0, 4, by = 1)) +
   labs(x = "", y = NULL) +
   facet_wrap(
-    ~ variable, ncol = 1, scales = "free",
+    ~ variable, nrow = 1, scales = "free",
     strip.position = "left",
     labeller = y_lab
   ) +
@@ -55,4 +74,4 @@ casual_tib %>%
     legend.box.spacing = unit(0.1, "line")
   )
 
-ggsave("submission/figures/fig2_hetero_vs_gay_men.pdf", width = 5, height = 9)
+ggsave(output_file, width = 9, height = 5)

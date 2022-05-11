@@ -9,8 +9,11 @@
 
 library(tidyverse); library(magrittr); library(here); library(broom); library(effectsize)
 
-input_file <- commandArgs(trailingOnly = TRUE)
-output_file <- "data/processed/compare_hetero_gay_men.csv"
+args <- commandArgs(trailingOnly = TRUE)
+#args <- c("data/processed/casual_sex_sim.csv", "data/processed/compare_hetero_gay_men.csv")
+
+input_file <- args[1]
+output_file <- args[2]
 
 casual_tib <- here(input_file) %>% 
   read_csv() %>% 
@@ -44,18 +47,18 @@ casual_t_test <-
   casual_long %>% 
   nest_by(dlikelihood_dstandard) %>% 
   mutate(
-    m_inpool = t.test(m_inpool ~ homosexual, data = data) %>% tidy() %>% 
+    m_inpool = t.test(m_inpool ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       select(statistic, p.value, parameter),
-    m_outpool = t.test(m_outpool ~ homosexual, data = data) %>% tidy() %>% 
+    m_outpool = t.test(m_outpool ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       select(statistic, p.value, parameter),
-    m_exp_all = t.test(m_exp_all ~ homosexual, data = data) %>% tidy() %>% 
+    m_exp_all = t.test(m_exp_all ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       # somehow the map function doesn't work here and I wonder why...
       select(statistic, p.value, parameter),
-    m_exp_ip = t.test(m_exp_ip ~ homosexual, data = data) %>% tidy() %>% 
+    m_exp_ip = t.test(m_exp_ip ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       select(statistic, p.value, parameter),
-    m_partner_all = t.test(m_partner_all ~ homosexual, data = data) %>% tidy() %>% 
+    m_partner_all = t.test(m_partner_all ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       select(statistic, p.value, parameter),
-    m_partner_ip = t.test(m_partner_ip ~ homosexual, data = data) %>% tidy() %>% 
+    m_partner_ip = t.test(m_partner_ip ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       select(statistic, p.value, parameter)
   ) %>% 
   select(-data) %>% 
