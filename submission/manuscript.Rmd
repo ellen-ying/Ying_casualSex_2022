@@ -97,6 +97,11 @@ Yurun Ying^1^, Pekka Santtila^1^^,^^2^^,^^$\dagger$^
 
 # Abstract {-}
 
+Gender differences in short-term mating behaviors have been a well-documented phenomenon in human sexuality research. Existing studies usually conflate gender differences in preferences for short-term mating with differences in sexual behaviors, which is theoretically dubious. Using an agent-based model, the present study investigated whether men and women's different mating preferences resulted in any gender differences in short-term mating behaviors, and if they did, under what circumstances. The results suggested that heterosexual men and women had the same average number of short-term mating experiences and short-term mates even when gender differences in preferences fort-term mating existed. Gender differences in mating behaviors only emerged when heterosexual men and women in the mating pool were considered. Moreover, gay men had a higher average number of both outcomes than lesbian women and than heterosexual men under such a circumstance. These results suggest that theoretically speaking, gender differences in short-term mating behaviors only occurred among particular populations, or when men's preferences for short-term mating are not constrained by those of women. Suggestions for future research in human mating psychology and behaviors were provided.
+
+\ 
+
+*Keywords:* agent-based modeling, short-term mating, casual sex, sexual strategy theory, female choice hypothesis
 
 \newpage
 
@@ -140,7 +145,7 @@ We raised the following hypotheses in the present study: when there were gender 
 
 We developed an agent-based model to represent a simplified environment where men and women can move around, search for mates, and form long-term and/or short-term relationships. Space and time are modeled as discrete variables. Space was represented as discrete locations on a two-dimensional 33*33 lattice. Agents’ movement in the space was not meant to simulate physical movement but a state of encountering potential mates. Staying at one location represented being committed to a long-term relationship.
 
-The model measured **three** outcomes: (1) the number of men and women who had ever engaged in short-term mating **put this to the end**; (2) the number of short-term mating experiences of men and women; (3) the number of short-term mates of men and women. The number of short-term mating experienced and short-term mates were calculated by taking the average among the whole men/women population and among those who had engaged in short-term mating.
+The model measured two outcomes: (1) the number of short-term mating experiences of men and women; (2) the number of short-term mates of men and women. Additionally, we had also documented the number of men and women in the mating pool (i.e., who had ever engaged in short-term mating); The average number of short-term mating experiences and short-term mates were calculated by taking the average among the whole population of men/women (*N~m~* = *N~w~* = 150) and among those who had engaged in short-term mating.
 
 See the Supplemental Materials for the overview, design concepts, and details (ODD) protocol of the model, which includes detailed scheduling and parameterization. The model can be downloaded from the Github online repository [link masked for peer review]. The model was programmed in Netlogo 6.2.1 [@wilensky_1999].
 
@@ -153,7 +158,7 @@ Gender differences were modeled in agents’ likelihood of engaging in short-ter
 ## Model Schedule
 
 ### Initial setup
-In total, 150 women and 150 men were created on the lattice at random locations. All agents were initialized with (1) a three-unit maximum distance by which agents can move away from their birthplace (movement range); (2) a 10% likelihood of two agents forming a long-term relationship upon meeting; (3) single status and no long-term partner; (4) a mate value, sampled from a Gaussian distribution (*M* = 5, *SD* = 1.5); (5) no short-term mate or short-term mating history.
+In total, 150 women and 150 men were created on the lattice at random locations. All agents were initialized with (1) a three-unit maximum distance by which agents can move away from their birthplace (movement range); (2) a 10% likelihood of two agents forming a long-term relationship upon meeting; (3) single status and no long-term partner; (4) a mate value, sampled from a Gaussian distribution (*M* = 5.0, *SD* = 1.5); (5) no short-term mate or short-term mating history.
 
 The likelihood of engaging in short-term mating and the standard for short-term mates were initialized either the same or differently for men and women, depending on the experimental conditions.
 
