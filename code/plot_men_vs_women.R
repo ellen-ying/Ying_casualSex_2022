@@ -6,7 +6,7 @@
 # notes: none
 
 # load libraries
-library(tidyverse); library(ggplot2); library(wesanderson); library(here)
+library(tidyverse); library(wesanderson); library(here)
 
 args <- commandArgs(trailingOnly = TRUE)
 #args <- c("data/processed/casual_sex_sim.csv", "submission/figures/fig1_men_vs_women.pdf")
@@ -79,4 +79,4 @@ casual_tib %>%
     legend.box.spacing = unit(0, "npc")
   )
 
-ggsave(output_file, width = 5, height = 8)
+ggsave(output_file, width = 5, height = 6)

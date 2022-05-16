@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.11)  13 MAY 2022 12:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.11)  16 MAY 2022 17:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -595,11 +595,11 @@ l.184 \newpage
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 377.
 [6] [7] [8]
-<figures/fig1_men_vs_women.pdf, id=157, 361.35pt x 578.16pt>
+<figures/fig1_men_vs_women.pdf, id=157, 361.35pt x 433.62pt>
 File: figures/fig1_men_vs_women.pdf Graphic file (type pdf)
 <use figures/fig1_men_vs_women.pdf>
 Package pdftex.def Info: figures/fig1_men_vs_women.pdf  used on input line 512.
-(pdftex.def)             Requested size: 199.16766pt x 318.66827pt.
+(pdftex.def)             Requested size: 284.53156pt x 341.43785pt.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 513.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -611,13 +611,13 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9]
-<figures/fig2_hetero_vs_gay_men.pdf, id=164, 650.43pt x 361.35pt>
+[9] [10 <./figures/fig1_men_vs_women.pdf>]
+<figures/fig2_hetero_vs_gay_men.pdf, id=176, 650.43pt x 361.35pt>
 File: figures/fig2_hetero_vs_gay_men.pdf Graphic file (type pdf)
 <use figures/fig2_hetero_vs_gay_men.pdf>
 Package pdftex.def Info: figures/fig2_hetero_vs_gay_men.pdf  used on input line 561.
 (pdftex.def)             Requested size: 375.81058pt x 208.78365pt.
-[10 <./figures/fig1_men_vs_women.pdf>]
+
 Overfull \hbox (19.86847pt too wide) in paragraph at lines 594--614
  [] 
  []
@@ -629,7 +629,7 @@ Overfull \hbox (25.95659pt too wide) in paragraph at lines 642--662
 
 [12] [13] [14] [15] [16] [17] [18] (./manuscript.aux)
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: F9A16E49879BA746430F728C69561AB0;4231.
+(rerunfilecheck)             Checksum: 5AC2CB255A5DD92C51ABFF0B74C2274B;4231.
  ) 
 Here is how much of TeX's memory you used:
  13837 strings out of 480260
@@ -640,7 +640,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  60i,21n,63p,854b,469s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on manuscript.pdf (19 pages, 157943 bytes).
+Output written on manuscript.pdf (19 pages, 156915 bytes).
 PDF statistics:
  334 PDF objects out of 1000 (max. 8388607)
  298 compressed objects within 3 object streams

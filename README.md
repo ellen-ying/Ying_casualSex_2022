@@ -18,7 +18,6 @@ if they did, under what circumstances.
     -   `here` (v. 1.0.1)
     -   `broom` (v. 0.8.0)
     -   `effectsize` (v. 0.6.0.1)
-    -   `ggplot2` (v. 3.3.5)
     -   `rmarkdown` (v. 2.14)
     -   `knitr` (v. 1.39)
     -   `kableExtra` (v. 1.3.4)
@@ -34,7 +33,7 @@ if they did, under what circumstances.
     ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
-    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    ## [1] C/UTF-8/C/C/C/C
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -43,7 +42,7 @@ if they did, under what circumstances.
     ##  [1] kableExtra_1.3.4   knitr_1.39         rmarkdown_2.14     effectsize_0.6.0.1
     ##  [5] broom_0.8.0        here_1.0.1         forcats_0.5.1      stringr_1.4.0     
     ##  [9] dplyr_1.0.9        purrr_0.3.4        readr_2.1.2        tidyr_1.2.0       
-    ## [13] tibble_3.1.6       ggplot2_3.3.5      tidyverse_1.3.1   
+    ## [13] tibble_3.1.7       ggplot2_3.3.6      tidyverse_1.3.1   
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] httr_1.4.2        viridisLite_0.4.0 jsonlite_1.8.0    splines_4.1.3    

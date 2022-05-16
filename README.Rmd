@@ -4,7 +4,7 @@ author: "Yurun (Ellen) Ying"
 date: "5/6/2022"
 output: 
   github_document:
-    html_preview: true
+    html_preview: false
 ---
 
 ## Description
@@ -29,7 +29,6 @@ library(kableExtra)
   - `here` (v. `r packageVersion("here")`)
   - `broom` (v. `r packageVersion("broom")`)
   - `effectsize` (v. `r packageVersion("effectsize")`)
-  - `ggplot2` (v. `r packageVersion("ggplot2")`)
   - `rmarkdown` (v. `r packageVersion("rmarkdown")`)
   - `knitr` (v. `r packageVersion("knitr")`)
   - `kableExtra` (v. `r packageVersion("kableExtra")`)

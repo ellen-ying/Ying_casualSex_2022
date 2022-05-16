@@ -68,10 +68,11 @@ casual_tib %>%
     axis.text.x = element_blank(),
     panel.grid = element_blank(),
     panel.spacing = unit(0.5, "line"),
-    strip.text = element_text(size = 11),
+    strip.text = element_text(size = 12),
     strip.placement = "outside",
     legend.position = "bottom",
-    legend.box.spacing = unit(0.1, "line")
+    legend.box.spacing = unit(0.1, "line"),
+    legend.text = element_text(size = 12)
   )
 
 ggsave(output_file, width = 9, height = 5)
