@@ -1,5 +1,3 @@
-;; Model 3: All-homosexual mode added, counting short-term matings
-
 turtles-own [
   desirability               ;; the turtles' mating desireability
   mating-standard            ;; the desireability standard for a short-term mate
@@ -22,6 +20,16 @@ turtles-own [
 to setup
   clear-all
   create-turtles 300 [
+    set-basics
+  ]
+  set-sex ;; set the sex of turtles
+  set-short-term-likelihood ;; set the likelihood of short-term mating
+  set-standard ;; set the desirability standard for a short-term mate
+
+  reset-ticks
+end
+
+to set-basics
     set shape "person"
     set size 1
 
@@ -33,6 +41,7 @@ to setup
     set coupled? false ;; start without a partner
     set partner nobody
     set short-term-mate? false
+    set short-term-count 0
     set short-term-history [] ;; set an empty list to start with
     set number-of-partner-short 0 ;; set the number to 0 to start with
     set initiator? false ;; set non-initiator as the default option
@@ -41,12 +50,6 @@ to setup
     ;; record the spawning point of a turtle
     set original-x xcor
     set original-y ycor
-  ]
-  set-sex ;; set the sex of turtles
-  set-short-term-likelihood ;; set the likelihood of short-term mating
-  set-standard ;; set the desirability standard for a short-term mate
-
-  reset-ticks
 end
 
 to set-sex
@@ -97,6 +100,12 @@ to go
   ask turtles [
     update-sexual-partner  ;; turtles update their number of short-term mating partners
     update-likelihood ;; turtles updating the likelihood for short-term mating
+  ]
+
+  if dynamic-population? [
+    ;; new members come and some who are not coupled leave
+    ask one-of turtles [ spawn ]
+    ask one-of turtles with [ not coupled? ] [ die ]
   ]
 
   update-plot ;; plotting
@@ -225,6 +234,20 @@ to update-likelihood ;; turtle procedure: update the likelihood of shorting-term
   ]
 end
 
+to spawn ;; turtle procedure: bring new members into the population
+  hatch 1 [ ;; the new member has the same default settings as the rest of the population
+    set-basics
+    set color one-of [ turquoise orange ]
+    ifelse (color = turquoise) [
+      set short-term-likelihood male-short-term-likelihood
+      set mating-standard male-standard
+    ] [
+      set short-term-likelihood female-short-term-likelihood
+      set mating-standard female-standard
+    ]
+  ]
+end
+
 to update-plot ;; plotting procedure
   ;; plotting the relative frequency of coupled individuals
   set-current-plot "Coupled vs. time"
@@ -293,6 +316,7 @@ to update-plot ;; plotting procedure
     set-current-plot-pen "Female"
     plot 0
   ]
+
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -340,6 +364,23 @@ NIL
 1
 
 BUTTON
+79
+424
+160
+457
+go once
+go
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
 122
 387
 185
@@ -357,10 +398,10 @@ NIL
 1
 
 SLIDER
-15
-194
-219
-227
+17
+158
+221
+191
 male-short-term-likelihood
 male-short-term-likelihood
 0
@@ -372,25 +413,25 @@ male-short-term-likelihood
 HORIZONTAL
 
 SLIDER
-14
-233
-220
-266
+16
+197
+222
+230
 female-short-term-likelihood
 female-short-term-likelihood
 0
 100
-60.0
+50.0
 1
 1
 %
 HORIZONTAL
 
 PLOT
-904
-47
-1113
-225
+687
+251
+893
+429
 Sexual partner 1
 T
 N
@@ -406,10 +447,10 @@ PENS
 "Female" 1.0 0 -955883 true "" ""
 
 SLIDER
-54
-118
-187
-151
+56
+82
+189
+115
 movement-range
 movement-range
 1
@@ -420,11 +461,21 @@ movement-range
 NIL
 HORIZONTAL
 
+TEXTBOX
+688
+435
+895
+477
+The mean number of short-term sexual partners average over all males and females
+11
+0.0
+1
+
 SLIDER
+47
 45
-81
-196
-114
+198
+78
 number-of-male
 number-of-male
 0
@@ -436,10 +487,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-20
-156
-215
-189
+22
+120
+217
+153
 long-term-likelihood
 long-term-likelihood
 0
@@ -471,10 +522,10 @@ PENS
 "Total" 1.0 0 -16777216 true "" ""
 
 SLIDER
-54
-272
-185
-305
+56
+236
+187
+269
 male-standard
 male-standard
 0
@@ -486,10 +537,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-54
-309
-185
-342
+56
+273
+187
+306
 female-standard
 female-standard
 0
@@ -520,10 +571,10 @@ PENS
 "Female" 1.0 0 -955883 true "" ""
 
 PLOT
-683
-252
-893
-432
+904
+46
+1114
+226
 Had short-term
 T
 Freq
@@ -539,11 +590,21 @@ PENS
 "Female" 1.0 0 -955883 true "" ""
 "Total" 1.0 0 -16777216 true "" ""
 
+TEXTBOX
+913
+435
+1119
+494
+The mean number of short-term sexual partners average over males and females who've ever had short-term mating
+11
+0.0
+1
+
 SWITCH
-29
-348
-203
-381
+31
+311
+205
+344
 all-homosexual?
 all-homosexual?
 1
@@ -551,10 +612,10 @@ all-homosexual?
 -1000
 
 PLOT
-1124
-48
-1335
-224
+1127
+46
+1338
+222
 Short-term mating 1
 NIL
 NIL
@@ -588,91 +649,53 @@ PENS
 "Male" 1.0 0 -14835848 true "" ""
 "Female" 1.0 0 -955883 true "" ""
 
+SWITCH
+25
+350
+213
+383
+dynamic-population?
+dynamic-population?
+1
+1
+-1000
+
 @#$#@#$#@
-# WHAT IS IT?
+## WHAT IS IT?
 
-This is a model simulating sex differences in short-term mating behaviors. Findings in evolutionary psychology suggest that males have a stronger desire for short-term mating than females (Regan & Atkins, 2006). They also have lower standards for a short-term mating partner (Buss & Schmitt, 1993). This model explores how males and females (heterosexual and homosexual) may behave differently in short-term mating under these assumptions.
+(a general understanding of what the model is trying to show or explain)
 
-&nbsp;  
+## HOW IT WORKS
 
-# HOW IT WORKS
+(what rules the agents use to create the overall behavior of the model)
 
-The model runs with 300 agents in total. Agents in this model behave under the following rules on each tick:
+## HOW TO USE IT
 
-* Move to a random point around where they were spawned and decide on whether they would like a short-term mating on this tick
+(how to use the model, including a description of each of the items in the Interface tab)
 
-* If they meet someone else, the two agents have a short-term mating if (a) they have both decided to do so on this tick, and (b) they both meet each other’s standards for a short-term mating partner
+## THINGS TO NOTICE
 
-*  The two agents may form a long-term relationship; if they do so, they stay still with each other forever and their background turns grey (Notice: these coupled agents reduce their likelihood of choosing short-term mating and won’t move any more in the following ticks)
+(suggested things for the user to notice while running the model)
 
-&nbsp;  
+## THINGS TO TRY
 
-# HOW TO USE IT
-## Setup and Run the Model
+(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
 
-Press SETUP to setup the model, then press GO to start the simulation. 
+## EXTENDING THE MODEL
 
-Note: Changes in the following sliders and switches do not take effect until the next SETUP.
+(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
 
-*  The NUMBER-OF-MALE slider sets the number of males in the population.
+## NETLOGO FEATURES
 
-* The MOVERMENT-RANGE slider controls how far agents can go away from their spawning point; if you choose a value of 15, agents can go to anywhere on the panel.
+(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
 
-* The LONG-TERM-LIKELIHOOD slider sets the likelihood of forming a long-term relationship when two agents meet.
+## RELATED MODELS
 
-* The MALE-SHORT-TERM-LIKELIHOOD/FEMALE-SHORT-TERM-LIKELIHOOD slider sets the likelihood that a male/female agent chooses to have a short-term mating on each tick.
+(models in the NetLogo Models Library and elsewhere which are of related interest)
 
-* The MALE-STANDARD/FEMALE-STANDARD slider sets male/female agents’ standard for a short-term mating partner. (Note: All agents’ desirability values form a normal distribution with a mean of 5 and a standard deviation of 1.5. This means that around 68% have a desirability value lying within 3.5-6.5, and 95% have a value lying within 2-8.)
+## CREDITS AND REFERENCES
 
-* The ALL-HOMOSEXUAL? switch, when set on, turns everyone into gays and lesbians. Agents will only have short-term matings and/or form a long-term relationship with someone of the same sex.
-
-## Observe the Model
-
-There are four plots by which you can observe the model:
-
-* The “Coupled vs. time” plots the relative frequency of coupled individuals separately among males, females, and all agents.
-
-* The “Had short-term” plots the relative frequency of individuals who’ve ever had short-term matings.
-
-* The “Sexual partner 1” plots the mean number of short-term sexual partners averaged over the total number of males and females.
-
-* The “Sexual partner 2” plots the mean number of short-term sexual partners averaged over the number of males and females who’ve ever had short-term matings.
-
-* The “Short-term mating 1” plots the mean number of short-term matings averaged over the total number of males and females.
-
-* The “Short-term mating 2” plots the mean number of short-term matings averaged over the number of males and females who’ve ever had short-term matings.
-
-## Things to Try
-
-* Adjust the MALE-SHORT-TERM-LIKELIHOOD/FEMALE-SHORT-TERM-LIKELIHOOD slider assuming males have a higher likelihood than females, and then observe how the model behaves.
-
-* Adjust the MALE-STANDARD/FEMALE-STANDARD slider assuming females have a higher standard than males, and then observe how the model behaves.
-
-* Change the number of males in the population and observe the model.
-
-* Turn everyone into gays and lesbians and observe the model.
-
-Note: Run the model several times with the same setting and try many different values of each slider bar before you draw a conclusion.
-
-## Things to Notice
-
-There are many interesting things worth your attention:
-
-* What sex difference looks like in different settings
-
-* The shape of the plotted curves under each setting
-
-* The comparison between when everyone is heterosexual and when everyone is homosexual
-
-&nbsp;  
-
-# CREDITS AND REFERENCES
-
-Buss, D. M., & Schmitt, D. P. (1993). Sexual strategies theory: An evolutionary perspective on human mating. *Psychological Review, 100*(2), 204–232. https://doi.org/doi:10.1037/0033-295X.100.2.204d
-
-Regan, P. C., & Atkins, L. (2006). Sex differences and similarities in frequency and intensity of sexual desire. *Social Behavior and Personality: An International Journal, 34*(1), 95–102. https://doi.org/10.2224/sbp.2006.34.1.95
-
-&nbsp;
+(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
 @#$#@#$#@
 default
 true
@@ -983,85 +1006,6 @@ NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
-<experiments>
-  <experiment name="trial" repetitions="1" runMetricsEveryStep="false">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="1000"/>
-    <metric>mean [number-of-partner-short] of turtles with [ color = turquoise ]</metric>
-    <metric>mean [number-of-partner-short] of turtles with [ color = orange ]</metric>
-    <metric>mean [short-term-count] of turtles with [ color = turquoise ]</metric>
-    <metric>mean [short-term-count] of turtles with [ color = orange ]</metric>
-    <steppedValueSet variable="number-of-male" first="50" step="50" last="250"/>
-    <enumeratedValueSet variable="movement-range">
-      <value value="3"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="long-term-likelihood">
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="male-short-term-likelihood">
-      <value value="100"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="female-short-term-likelihood">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="male-standard">
-      <value value="3"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="female-standard">
-      <value value="7"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="all-homosexual?">
-      <value value="false"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="short-term-experiment" repetitions="5" runMetricsEveryStep="false">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="1000"/>
-    <metric>sum [number-of-partner-short] of turtles with [ color = turquoise ]</metric>
-    <metric>sum [number-of-partner-short] of turtles with [ color = orange ]</metric>
-    <metric>sum [short-term-count] of turtles with [ color = turquoise ]</metric>
-    <metric>sum [short-term-count] of turtles with [ color = orange ]</metric>
-    <metric>count turtles with [ color = turquoise and short-term-count &gt; 0 ]</metric>
-    <metric>count turtles with [ color = orange and short-term-count &gt; 0 ]</metric>
-    <metric>count turtles with [ color = turquoise ]</metric>
-    <metric>count turtles with [ color = orange ]</metric>
-    <enumeratedValueSet variable="number-of-male">
-      <value value="150"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="movement-range">
-      <value value="3"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="long-term-likelihood">
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="male-short-term-likelihood">
-      <value value="80"/>
-      <value value="90"/>
-      <value value="100"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="female-short-term-likelihood">
-      <value value="40"/>
-      <value value="50"/>
-      <value value="60"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="male-standard">
-      <value value="1"/>
-      <value value="2"/>
-      <value value="3"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="female-standard">
-      <value value="5"/>
-      <value value="6"/>
-      <value value="7"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="all-homosexual?">
-      <value value="false"/>
-      <value value="true"/>
-    </enumeratedValueSet>
-  </experiment>
-</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
