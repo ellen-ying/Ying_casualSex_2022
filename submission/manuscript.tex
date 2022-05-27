@@ -134,7 +134,8 @@ Santtila\textsuperscript{1,3,\(\dagger\)}
 
 \textsuperscript{1} Faculty of Arts and Sciences, NYU Shanghai
 
-\textsuperscript{2} xxxx
+\textsuperscript{2} Faculty of Arts, Psychology and Theology, Åbo
+Akademi University
 
 \textsuperscript{3} NYU-ECNU Institute for Social Development at NYU
 Shanghai
@@ -154,29 +155,30 @@ addressed: \url{pekka.santtila@nyu.edu}
 \section*{Abstract}\label{abstract}}
 \addcontentsline{toc}{section}{Abstract}
 
-Gender differences in short-term mating behaviors have been a
-well-documented phenomenon in human sexuality research. Existing studies
-usually conflate gender differences in mating preferences with
-differences in sexual behaviors, which is theoretically dubious. Using
-an agent-based model, the present study investigated the circumstances
-under which men and women's differential preferences for short-term
-mating would result in gender differences in short-term mating
-behaviors. The results from the model suggested that heterosexual men
-and women had the same average number of short-term mating experiences
-and short-term mates even when men had stronger preferences for
-short-term mating. Gender differences in mating behaviors only emerged
-when heterosexual men and women in the mating pool (i.e., those with a
-non-zero number of short-term mating experiences) were considered.
-Moreover, gay men had a higher average number of both outcomes than
-lesbian women as well as than heterosexual men when men had stronger
-preferences for short-term mating. These results suggest that
+Gender differences in short-term mating behaviors are well-documented in
+human sexuality research. Existing studies usually conflate gender
+differences in mating preferences with differences in sexual behaviors,
+which is theoretically problematic. Using an agent-based model, we
+investigated the circumstances under which heterosexual and homosexual
+men and women's differential preferences for short-term mating would
+result in gender differences in short-term mating behaviors. The model
+showed that when all individuals in a closed heterosexual population
+were considered, men and women had the same average number of short-term
+mating experiences and short-term mates even when men had stronger
+preferences for short-term mating. Men (vs.~women) had a higher average
+number of both experiences and mates only when heterosexual men and
+women in the mating pool (i.e., those with a non-zero number of
+short-term mating experiences) were considered. Moreover, when men had
+stronger preferences for short-term mating than women, gay men had a
+higher average number of both experiences and mates compared to both
+lesbian women and heterosexual men. These results suggest that
 theoretically speaking, even when gender differences in mating
 preferences existed, those in short-term mating behaviors only occurred
 among particular populations, or when men's preferences for short-term
 mating are not constrained by those of women. Suggestions for future
 research in human mating psychology and behaviors were provided.
 
-~
+\hfill\break
 
 \emph{Keywords:} agent-based modeling, short-term mating, casual sex,
 sexual strategy theory, female choice hypothesis
@@ -187,23 +189,22 @@ sexual strategy theory, female choice hypothesis
 \section{Introduction}\label{introduction}}
 
 Gender differences in sexual behaviors, especially short-term mating
-behaviors, have been a well-documented phenomenon in human sexuality
-research. For example, research has found that heterosexual men, as
-compared to heterosexual women, have a higher average number of past
-short-term sexual partners (Oliver \& Hyde, 1993; Petersen \& Hyde,
-2010; Rissel et al., 2014), have short-term mating more frequently
-(Petersen \& Hyde, 2010), and engage in extramarital sex more often
+behaviors, are well-documented in human sexuality research. For example,
+research has found that heterosexual men, as compared to heterosexual
+women, have a higher average number of past short-term sexual partners
+(Oliver \& Hyde, 1993; Petersen \& Hyde, 2010; Rissel et al., 2014), and
+engage in both short-term mating and extramarital sex more often
 (Petersen \& Hyde, 2010). These gender differences have also been
 observed between gay men and lesbian women (Bailey et al., 1994; Bryant
 \& Demian, 1994; Peplau et al., 1997, 2004).
 
-In the existing literature, gender differences in sexual behaviors are
-not usually distinguished from those in attitudes towards or preferences
-for short-term mating. Some researchers study gender differences on the
-two levels simultaneously without a conceptual distinction (e.g.,
-Petersen \& Hyde, 2010), whereas some implicitly equate the two,
-assuming that behavioral differences are a direct expression of the
-psychological ones (e.g., Schmitt et al., 2001).
+In the existing literature, gender differences in actual sexual
+behaviors are not usually distinguished from those in attitudes towards
+or preferences for short-term mating. Some researchers study gender
+differences at the two levels simultaneously without a conceptual
+distinction (e.g., Petersen \& Hyde, 2010), whereas some implicitly
+equate the two, assuming that behavioral differences are a direct
+expression of psychological ones (e.g., Schmitt et al., 2001).
 
 Intuitive as this line of reasoning is, there are good reasons to doubt
 its soundness. This is because any heterosexual sexual encounter
@@ -215,15 +216,14 @@ short-term mate. As a result, the psychological differences in
 short-term mating preferences may not result in behavioral ones in the
 heterosexual case (Archer, 2019).
 
-The present study took gender differences in mating preferences as a
-presumption, which was conceptualized by sexual strategy theory (Buss \&
-Schmitt, 1993) and repeatedly found support by empirical studies (e.g.,
-Schmitt, 2003; Walter et al., 2020). Using an agent-based model, we
-investigated whether men and women's differential preferences for
-short-term mating resulted in any gender differences in short-term
-mating behaviors, specifically, in the number of short-term mating
-experiences and short-term mates, and if they did, under what
-circumstances.
+As a starting point, we took gender differences in mating preferences as
+conceptualized by the sexual strategy theory (Buss \& Schmitt, 1993) and
+repeatedly supported by empirical investigations (e.g., Schmitt, 2003;
+Walter et al., 2020). Using an agent-based model, we investigated
+whether men and women's differential preferences for short-term mating
+would result in gender differences in short-term mating behaviors, and
+if so, then under what conditions they would result in differences in
+the number of short-term mating experiences and short-term mates.
 
 \hypertarget{gender-differences-in-short-term-mating-preferences}{%
 \subsection{Gender differences in short-term mating
@@ -231,40 +231,40 @@ preferences}\label{gender-differences-in-short-term-mating-preferences}}
 
 Gender differences in mating preferences have been studied in the light
 of sexual strategy theory (Buss \& Schmitt, 1993). It posits that since
-the minimum investment that men devote to their offspring (contribution
-of sperm through one sexual act) is lower than that of women (gestation,
-labor, and lactation), men tend to have short-term mating as a larger
-part of their mating strategy than women do. This is because women's
-high minimum investment leads to higher opportunity cost (vs.~men) if
-they have sex with a suboptimal partner and give birth to offspring with
-a low survival chance. As a result, men may have a greater interest in
-short-term mating, desire a larger number of short-term mates in a given
-period, and be less selective with respect to accepting a potential mate
-(Buss \& Schmitt, 1993).
+the minimum obligatory investment that men must devote to their
+offspring (contribution of sperm through one sexual act) is lower than
+that of women (gestation, labor, and lactation), men tend to be
+relatively more interested in short-term mating compared to women. This
+is because the number of offspring women can produce is limited and
+cannot be increased by mating with a large number of men, whereas the
+reverse is the case for men. As a result, men are predicted to not only
+have a greater interest in short-term mating, but also desire a larger
+number of short-term mates in a given period and be less selective with
+respect to accepting a potential mate (Buss \& Schmitt, 1993).
 
 The hypotheses derived from sexual strategy theory have received
-extensive support from empirical studies. For example, men reported to
-be currently seeking short-term mates to a larger extent than women did
+extensive support in empirical studies. For example, men have reported
+to be currently seeking short-term mates to a larger extent than women
 (Buss \& Schmitt, 1993; Schmitt et al., 2001; Schmitt, 2003), and a
-larger proportion of them were in any way seeking short-term mates
-(vs.~not seeking) (Schmitt, 2003). These have been found among U.S.
-college students (Buss \& Schmitt, 1993; Schmitt et al., 2001) as well
-as in ten world regions in a cross-cultural study (Schmitt, 2003).
-Similarly, men across the world also reported to desire more short-term
-sexual partners compared to women for a number of given time periods
-(e.g., a month, a year) (Buss \& Schmitt, 1993; McBurney et al., 2005;
-Schmitt, 2003). The gender differences were significant regardless of
-whether they were estimated by mean (Buss \& Schmitt, 1993; Schmitt et
-al., 2001; Schmitt, 2003), median (Schmitt et al., 2001; Schmitt, 2003),
-or percentage (Schmitt, 2003) statistics.
+larger proportion of men were in any way seeking short-term mates
+(vs.~not seeking) (Schmitt, 2003). Similar results have been found among
+both U.S. college students (Buss \& Schmitt, 1993; Schmitt et al., 2001)
+as well as in ten world regions in a cross-cultural study (Schmitt,
+2003). Similarly, men across the world have also reported to desire more
+short-term sexual partners compared to women over different future time
+periods (e.g., a month, a year) (Buss \& Schmitt, 1993; McBurney et al.,
+2005; Schmitt, 2003). The gender differences have been found regardless
+of whether they were estimated using mean (Buss \& Schmitt, 1993;
+Schmitt et al., 2001; Schmitt, 2003), median (Schmitt et al., 2001;
+Schmitt, 2003), or percentage (Schmitt, 2003) statistics.
 
 As for mating standards, men are less selective in accepting someone as
 a potential short-term mate. For example, studies using U.S. college
-samples found that the minimum percentile ranks that men found
+samples have found that the minimum percentile ranks that men found
 acceptable for a potential short-term sexual partner were lower than
 those accepted by women, both in terms of overall desirability and
 individual traits (e.g., social status, attractiveness) (Kenrick et al.,
-1990; Regan, 1998). A study also found that when presented with
+1990; Regan, 1998). Another study also found that when presented with
 identical descriptions of potential mates, men on average rated them as
 more desirable than women did (Wiederman \& Dubois, 1998).
 
@@ -273,31 +273,33 @@ existed between gay men and lesbian women. A survey study using a
 community sample from the U.S. found that gay men were more interested
 in short-term mating than lesbian women were, and that this gender
 difference was comparable to that existing among heterosexual
-individuals (Bailey et al., 1994). An indirect piece of evidence on
-differential standards for short-term mates comes from a recent study
-finding that significantly more gay men than lesbian women reported to
-have accepted a casual sexual offer from a same-gender person (Matsick
-et al., 2021). Past studies suggest that the gender difference in the
-acceptance rate of casual sexual offers may originate from men and
-women's differential standards for short-term mates (Conley et al.,
-2011; Hald \& Høgh-Olesen, 2010). Thus, as a postulation, gay men may
-also have lower standards than lesbian women for short-term mates.
+individuals (Bailey et al., 1994). An additional indirect piece of
+evidence on differential standards for short-term mates comes from a
+recent study finding that significantly more gay men than lesbian women
+reported to have accepted a casual sexual offer from a same-gender
+person (Matsick et al., 2021). Past studies suggest that the gender
+difference in the acceptance rate of casual sexual offers may originate
+from men and women's differential standards for short-term mates (Conley
+et al., 2011; Hald \& Høgh-Olesen, 2010). Thus, as a postulation, gay
+men may also have lower standards than lesbian women for short-term
+mates.
 
 \hypertarget{constraints-on-mens-preferences-for-short-term-mating}{%
 \subsection{Constraints on men's preferences for short-term
 mating}\label{constraints-on-mens-preferences-for-short-term-mating}}
 
-Since heterosexual sex involves both a man and a woman in most cases,
-men's interest in short-term mating can be constrained by women's
-preference for long-term relationships (Archer, 2019; Symons, 1979).
-This is because men's short-term mating preferences can only translate
-into behaviors when there are women willing to have sex with them. When
-a new short-term mating encounter occurs, it counts towards men's total
+Since heterosexual sex in most cases involves one man and one woman,
+men's relatively high interest in short-term mating can be constrained
+by women's preference for long-term relationships (Archer, 2019; Symons,
+1979). This is because men's short-term mating preferences -- with the
+relatively rare exception of sexual violence -- can only translate into
+behaviors when there are women willing to have sex with them. When a new
+short-term mating encounter occurs, it counts both towards men's total
 number of short-term mating encounters as well as towards women's.
 Similarly, a new short-term mate counts towards both men and women's
 total number of short-term mates. Therefore, the total number of
 short-term mating experiences and short-term mates must be equal between
-heterosexual men and women on a population level. However, it is
+heterosexual men and women at the population level. However, it is
 important to note that although heterosexual men's total number of
 short-term mating is equal to that of women, this does not necessarily
 mean that the total number of men and women who have ever had short-term
@@ -305,38 +307,38 @@ mating must be equal. It is possible that there is a smaller proportion
 of men (vs.~the proportion of women) who contribute to the total number
 of short-term mating. Following this line of reasoning, we would expect
 to observe no gender difference in short-term mating behaviors among
-heterosexual individuals even when there were gender differences in
+heterosexual individuals even when there are gender differences in
 mating preferences.
 
 As a comparison, in the cases of gay men and lesbian women, men's
 preferences are not constrained by women's, but only by those of other
-men, who, arguably, have more similar preferences. This would allow for
-a more direct behavioral expression of men's mating preferences. The
-notion that gay men have less restricted preferences was borne out in
-the proportion of individuals who have engaged in extradyadic sex
-(Peplau et al., 2004). A study showed that the proportions of
-heterosexual men and women who have engaged in extradyadic sex were 26\%
-and 21\%, respectively, while the statistics among gay men and lesbian
-women were 82\% and 28\%, respectively (Peplau et al., 2004). Therefore,
-we would theoretically expect to observe gender differences in
+men, who, arguably, have a similar high interest in short-term mating.
+This would allow for a more direct behavioral expression of men's mating
+preferences. The notion that gay men have less restricted preferences is
+borne out in the proportion of individuals who have engaged in
+extradyadic sex (Peplau et al., 2004). A study showed that the
+proportions of heterosexual men and women who had engaged in extradyadic
+sex were 26\% and 21\%, respectively, while the statistics among gay men
+and lesbian women were 82\% and 28\%, respectively (Peplau et al.,
+2004). Therefore, we would expect to observe gender differences in
 short-term mating behaviors between gay men and lesbian women. Moreover,
-we would also expect to find that gay men, as compared to heterosexual
-men, engaged in more short-term mating behaviors due to the lessened
-constraint on their mating preferences.
+we would also expect to find that gay men, compared to heterosexual men,
+engaged in more short-term mating behaviors due to less constraints on
+their mating preferences.
 
 \hypertarget{a-simple-model-of-short-term-mating-behaviors}{%
 \subsection{A simple model of short-term mating
 behaviors}\label{a-simple-model-of-short-term-mating-behaviors}}
 
 By using a spatial agent-based model, the present study investigated
-whether men and women's different preferences for short-term mating
-resulted in any gender differences in short-term mating behaviors, and
+whether men and women's differential preferences for short-term mating
+would result in gender differences in short-term mating behaviors, and
 if they did, under what circumstances. Preferences for short-term mating
-were operationally defined as the interest in short-term mating and
-standards for short-term mates (Buss \& Schmitt, 1993). Short-term
-mating behaviors were operationally defined as the number of short-term
-mating experiences and the number of past short-term mates (Petersen \&
-Hyde, 2010).
+were operationally defined as the likelihood of engaging in short-term
+mating when encountering a mate as well as the standards for short-term
+mates (Buss \& Schmitt, 1993). Short-term mating behaviors were
+operationally defined as the number of short-term mating experiences and
+the number of past short-term mates (Petersen \& Hyde, 2010).
 
 We modeled this process among both heterosexual individuals and gay men
 and lesbian women to examine whether constraints set by the opposite
@@ -344,9 +346,9 @@ sex's preferences would affect short-term mating behaviors. Individuals'
 sexual orientation was conceptualized in terms of behaviors only in our
 model. Heterosexual men had short-term mating or formed a long-term
 relationship only with women, while gay men only with other men, and
-vice versa for women.
+mutatis mutandis for women.
 
-We raised the following hypotheses in the present study: when there were
+We formulated the following hypotheses in the present study: assuming
 gender differences in preferences for short-term mating, 1) there would
 be gender differences in short-term mating behaviors among gay men and
 lesbian women, with gay men being engaged in more such behaviors, and 2)
@@ -361,8 +363,8 @@ heterosexual men.
 
 We developed an agent-based model to represent a simplified environment
 where men and women can move around, search for mates, and form
-long-term and/or short-term relationships. Space and time are modeled as
-discrete variables. Space was represented as discrete locations on a
+long-term and/or short-term relationships. Space and time were modeled
+as discrete variables. Space was represented as discrete locations on a
 two-dimensional 33*33 lattice. Agents' movement in the space was not
 meant to simulate physical movement but a state of encountering
 potential mates. Staying at one location represented being committed to
@@ -374,9 +376,9 @@ and women. Additionally, we also measured the number of men and women in
 the mating pool (i.e., those with a non-zero number of short-term mating
 experiences). The average numbers of short-term mating experiences and
 short-term mates were calculated by taking the average among the whole
-population of men/women (\emph{N\textsubscript{m}} =
-\emph{N\textsubscript{w}} = 150) and among those who had engaged in
-short-term mating.
+population of men and women (\emph{N\textsubscript{men}} =
+\emph{N\textsubscript{women}} = 150) and among those who had engaged in
+any short-term mating.
 
 See the Supplemental Materials for the overview, design concepts, and
 details (ODD) protocol of the model, which includes detailed scheduling
@@ -409,7 +411,8 @@ gender difference in short-term mating likelihood, both women and men
 had a likelihood of 25\%. When there was a gender difference in mating
 standards, men had a mating standard of 3 (the highest possible value =
 10), while women had a standard of 5 (Kenrick et al., 1990; Regan,
-1998). When there was no gender difference in mating standards, both men
+1998), that is, they would not mate with a person with a lower mate
+value. When there was no gender difference in mating standards, both men
 and women had a standard of 5.
 
 \hypertarget{model-schedule}{%
@@ -433,8 +436,9 @@ men and women, depending on the experimental conditions.
 \hypertarget{procedures}{%
 \subsubsection{Procedures}\label{procedures}}
 
-\hypertarget{heterosexual-procedures.}{%
-\paragraph{Heterosexual procedures.}\label{heterosexual-procedures.}}
+\hypertarget{procedures-for-heterosexual-agents.}{%
+\paragraph{Procedures for heterosexual
+agents.}\label{procedures-for-heterosexual-agents.}}
 
 At each time step, agents first checked whether they were in a long-term
 relationship. If they were not in a long-term relationship, they set
@@ -443,30 +447,30 @@ birthplace) or faced the birthplace (if they were out of the movement
 range from the birthplace) and moved by a random distance. The random
 distance was less than half of the movement range. If they were in a
 long-term relationship, they did not move. Then, the agents decided on
-whether to engage in short-term mating by a chance of the chosen
+whether to engage in short-term mating using the predetermined
 likelihood (either 25\% or 40\%).
 
 Women checked to see if any men were at the same location. If there
-were, they randomly chose one of them as their potential short-term
-mate. If both men and women met each other's mating standards and both
-of them decided to engage in short-term mating, they had sex. This would
-result in increasing both parties' number of short-term mating
-experiences by one. They also recorded each other on their lists of past
+were, they randomly chose one of them as a potential short-term mate. If
+both men and women met each other's mating standards and both of them
+decided to engage in short-term mating, they had sex. This would result
+in increasing both parties' number of short-term mating experiences by
+one. They also recorded each other on their respective lists of past
 short-term mates if they were not on the lists yet.
 
 Then, women randomly selected one man at the same location as their
 potential long-term partner. There was a 10\% of chance that a pair
 would form a long-term relationship. After forming a long-term
-relationship, both men and women changed to coupled status and register
-each other as the long-term partner.
+relationship, both men and women changed to coupled status and
+registered each other as their long-term partner.
 
-\hypertarget{gay-men-and-lesbian-women-procedures.}{%
-\paragraph{Gay men and lesbian women
-procedures.}\label{gay-men-and-lesbian-women-procedures.}}
+\hypertarget{procedures-for-gay-men-and-lesbian-women-agents.}{%
+\paragraph{Procedures for gay men and lesbian women
+agents.}\label{procedures-for-gay-men-and-lesbian-women-agents.}}
 
 At each time step, men and women moved and decided on short-term mating
-as the agents did in the heterosexual procedures. Half of the agents (75
-men and 75 women) were also given the initiator status. The initiators
+as the agents did in the heterosexual case. Half of the agents (75 men
+and 75 women) were also given an initiator status. The initiators
 checked to see whether there were other agents at the same location. The
 rest of the procedures were identical to the heterosexual procedures,
 except that the agents only chose those with the same gender as
@@ -480,14 +484,14 @@ simulations for each experiment, including 2,500 simulations for each
 condition. We controlled for initializing random seeds in the model
 runs. All simulations were run using Netlogo 6.2.1 (Wilensky, 1999).
 
-\hypertarget{statistical-analysis}{%
-\subsection{Statistical analysis}\label{statistical-analysis}}
+\hypertarget{statistical-analyses}{%
+\subsection{Statistical analyses}\label{statistical-analyses}}
 
 Statistical analyses were conducted using R version 4.1.3 (R Core Team,
 2022) and the figures were generated by the ggplot2 package (Wickham,
 2016). Two-tailed independent samples \emph{t}-tests were used for all
 statistical comparisons. The data were assumed to be normally
-distributed within each condition but was not formally tested.
+distributed within each condition.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -499,18 +503,18 @@ behaviors}\label{gender-differences-in-short-term-mating-behaviors}}
 The results from Experiment 1 showed that when there were gender
 differences in preferences for short-term mating, there was no gender
 difference in the average number of short-term mating experiences among
-heterosexual individuals (\emph{M\textsubscript{m}} = 1.43,
-\emph{SD\textsubscript{m}} = 0.24; \emph{M\textsubscript{w}} = 1.43,
-\emph{SD\textsubscript{w}} = 0.24), Cohen's \emph{d} = 0. Nor was there
-a difference in the average number of short-term mates
-(\emph{M\textsubscript{m}} = 0.80, \emph{SD\textsubscript{m}} = 0.11;
-\emph{M\textsubscript{w}} = 0.80, \emph{SD\textsubscript{w}} = 0.11),
-Cohen's \emph{d} = 0 (Figure 1).
+heterosexual individuals (\emph{M\textsubscript{men}} = 1.43,
+\emph{SD\textsubscript{men}} = 0.24; \emph{M\textsubscript{women}} =
+1.43, \emph{SD\textsubscript{women}} = 0.24), Cohen's \emph{d} = 0. Nor
+was there a difference in the average number of short-term mates
+(\emph{M\textsubscript{men}} = 0.80, \emph{SD\textsubscript{men}} =
+0.11; \emph{M\textsubscript{w}} = 0.80, \emph{SD\textsubscript{women}} =
+0.11), Cohen's \emph{d} = 0 (Figure 1).
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=100mm]{figures/fig1_men_vs_women.pdf}
-  \caption{\textbf{Short-term mating behaviors of men and women after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables separately for heterosexual individuals and gay men and lesbian women. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. Statistics were calculated using the full population of men and women in the model (\textit{N\textsubscript{m}} = \textit{N\textsubscript{w}} = 150).}
+  \caption{\textbf{Short-term mating behaviors of men and women after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables separately for heterosexual individuals and gay men and lesbian women. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. Statistics were calculated using the full population of men and women in the model (\textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150).}
 \end{figure}
 
 The results from Experiment 2 showed that when there were gender
@@ -526,29 +530,28 @@ the average number of short-term mates was higher among gay men
 .001, Cohen's \emph{d} = 10.12.
 
 In Experiment 1, however, when the means of the outcome variables were
-calculated among men and women in the mating pool (the number of
-individuals in the mating pool: \emph{M\textsubscript{m}} = 56.85,
-\emph{SD\textsubscript{m}} = 5.99; \emph{M\textsubscript{w}} = 77.04,
-\emph{SD\textsubscript{w}} = 7.53), there were gender differences in
-short-term mating behaviors when men and women had differential
-preferences for short-term mating. The average number of short-term
-mating experiences was higher among heterosexual men (\emph{M} = 3.78,
-\emph{SD} = 0.50) than among heterosexual women (\emph{M} = 2.79,
-\emph{SD} = 0.35), \emph{t}(4,998) = -81.53, \emph{p} \textless{} .001,
-Cohen's \emph{d} = 2.31. Likewise, the average number of short-term
-mates was higher among heterosexual men (\emph{M} = 2.12, \emph{SD} =
-0.17) than among heterosexual women (\emph{M} = 1.56, \emph{SD} = 0.11),
-\emph{t}(4,998) = -135.85, \emph{p} \textless{} .001, Cohen's \emph{d} =
-3.84.
+calculated only among men and women in the mating pool (the number of
+individuals in the mating pool: \emph{M\textsubscript{men}} = 56.85,
+\emph{SD\textsubscript{men}} = 5.99; \emph{M\textsubscript{women}} =
+77.04, \emph{SD\textsubscript{women}} = 7.53), there were gender
+differences in short-term mating behaviors when men and women had
+differential preferences for short-term mating. The average number of
+short-term mating experiences was higher among heterosexual men
+(\emph{M} = 3.78, \emph{SD} = 0.50) than among heterosexual women
+(\emph{M} = 2.79, \emph{SD} = 0.35), \emph{t}(4,998) = -81.53, \emph{p}
+\textless{} .001, Cohen's \emph{d} = 2.31. Likewise, the average number
+of short-term mates was higher among heterosexual men (\emph{M} = 2.12,
+\emph{SD} = 0.17) than among heterosexual women (\emph{M} = 1.56,
+\emph{SD} = 0.11), \emph{t}(4,998) = -135.85, \emph{p} \textless{} .001,
+Cohen's \emph{d} = 3.84.
 
 \hypertarget{comparing-heterosexual-and-gay-men}{%
 \subsection{Comparing heterosexual and gay
 men}\label{comparing-heterosexual-and-gay-men}}
 
-The results comparing across the two experiments revealed that gay men
-engaged in short-term mating behaviors more than heterosexual men did
-(Figure 2). The average number of short-term mating experiences was
-higher among gay men (\emph{M} = 2.63, \emph{SD} = 0.37) than among
+Gay men engaged in short-term mating behaviors more than heterosexual
+men did (Figure 2). The average number of short-term mating experiences
+was higher among gay men (\emph{M} = 2.63, \emph{SD} = 0.37) than among
 heterosexual men (\emph{M} = 1.43, \emph{SD} = 0.24), \emph{t}(4,998) =
 -134.87, \emph{p} \textless{} .001, Cohen's \emph{d} = 3.81. Similarly,
 the average number of short-term mates was higher among gay men
@@ -559,30 +562,30 @@ the average number of short-term mates was higher among gay men
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\columnwidth]{figures/fig2_hetero_vs_gay_men.pdf}
-  \caption{\textbf{Short-term mating behaviors of heterosexual and gay men after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. Statistics were calculated using the full population of heterosexual and gay men in the model (\textit{N\textsubscript{hm}} = \textit{N\textsubscript{gm}} = 150).}
+  \caption{\textbf{Short-term mating behaviors of heterosexual and gay men after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. Statistics were calculated using the full population of heterosexual and gay men in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).}
 \end{figure}
 
 \hypertarget{comparing-across-conditions}{%
 \subsection{Comparing across
 conditions}\label{comparing-across-conditions}}
 
-In an exploratory manner, we also compared across conditions to see
-which of the two dimensions of mating preferences contributed to gender
-differences in short-term mating behaviors.
+We also ran analyses across conditions to see which of the two
+dimensions of mating preferences contributed to gender differences in
+short-term mating behaviors.
 
 Among heterosexual individuals, gender differences in short-term mating
-behaviors, as calculated among individuals in the mating pool, emerged
+behaviors, when calculated among individuals in the mating pool, emerged
 when men and women had different standards for short-term mates.
 Heterosexual men (vs.~heterosexual women) in the mating pool had a
 higher average number of short-term mating experiences and short-term
 mates as long as they had lower mating standards, even when no gender
 difference existed in short-term mating likelihood (experiences:
-\emph{M\textsubscript{m}} = 2.82, \emph{SD\textsubscript{m}} = 0.36,
-\emph{M\textsubscript{w}} = 2.21, \emph{SD\textsubscript{w}} = 0.28,
-Cohen's \emph{d} = 1.89; partners: \emph{M\textsubscript{m}} = 1.76,
-\emph{SD\textsubscript{m}} = 0.15; \emph{M\textsubscript{w}} = 1.38,
-\emph{SD\textsubscript{w}} = 0.09, Cohen's \emph{d} = 3.13). In
-comparison, virtually no gender differences in short-term mating
+\emph{M\textsubscript{men}} = 2.82, \emph{SD\textsubscript{men}} = 0.36,
+\emph{M\textsubscript{women}} = 2.21, \emph{SD\textsubscript{women}} =
+0.28, Cohen's \emph{d} = 1.89; partners: \emph{M\textsubscript{men}} =
+1.76, \emph{SD\textsubscript{men}} = 0.15; \emph{M\textsubscript{women}}
+= 1.38, \emph{SD\textsubscript{women}} = 0.09, Cohen's \emph{d} = 3.13).
+In comparison, virtually no gender differences in short-term mating
 behaviors existed when men and women had the same mating standards
 (Table 1).
 
@@ -608,31 +611,31 @@ Different likelihood*Different standard & 3.78 & 0.50 & 2.79 & 0.35 & 2.31 & 2.1
 \end{tabular}}
 \begin{tablenotes}
 \small
-\item \textit{Note.} The statistics were calculated with subsamples of men and women who had had enagged in short-term mating behaviors. See Supplementary Materials for the mean and standard deviation of sample sizes.
+\item \textit{Note.} The statistics were calculated with subsamples of men and women who had had engaged in short-term mating behaviors. See Supplementary Materials for the mean and standard deviation of sample sizes.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 Among gay men and lesbian women, gender differences in short-term mating
-behaviors emerged either when they had different short-term mating
-likelihood or when their mating standards were different. Gay men
+behaviors emerged both when they had different short-term mating
+likelihood and when their mating standards were different. Gay men
 (vs.~lesbian women) had a higher average number of short-term mating
 experiences and short-term mates when they had a higher short-term
-mating likelihood (experiences: \emph{M\textsubscript{m}} = 0.80,
-\emph{SD\textsubscript{m}} = 0.23, \emph{M\textsubscript{w}} = 0.32,
-\emph{SD\textsubscript{w}} = 0.10, Cohen's \emph{d} = 2.67; partners:
-\emph{M\textsubscript{m}} = 0.52, \emph{SD\textsubscript{m}} = 0.13,
-\emph{M\textsubscript{w}} = 0.25, \emph{SD\textsubscript{w}} = 0.07,
-Cohen's \emph{d} = 2.60), or when they had lower mating standards
-(experiences: \emph{M\textsubscript{m}} = 1.05,
-\emph{SD\textsubscript{m}} = 0.18, \emph{M\textsubscript{w}} = 0.32,
-\emph{SD\textsubscript{w}} = 0.10, Cohen's \emph{d} = 5.10; partners:
-\emph{M\textsubscript{m}} = 0.82, \emph{SD\textsubscript{m}} = 0.12,
-\emph{M\textsubscript{w}} = 0.25, \emph{SD\textsubscript{w}} = 0.07,
-Cohen's \emph{d} = 5.78). In comparison, virtually no gender differences
-in short-term mating behaviors existed when gay men and lesbian women
-had the same short-term mating likelihood and mating standards (Table
-2).
+mating likelihood (experiences: \emph{M\textsubscript{men}} = 0.80,
+\emph{SD\textsubscript{men}} = 0.23, \emph{M\textsubscript{women}} =
+0.32, \emph{SD\textsubscript{women}} = 0.10, Cohen's \emph{d} = 2.67;
+partners: \emph{M\textsubscript{men}} = 0.52,
+\emph{SD\textsubscript{men}} = 0.13, \emph{M\textsubscript{women}} =
+0.25, \emph{SD\textsubscript{women}} = 0.07, Cohen's \emph{d} = 2.60),
+or when they had lower mating standards (experiences:
+\emph{M\textsubscript{men}} = 1.05, \emph{SD\textsubscript{men}} = 0.18,
+\emph{M\textsubscript{women}} = 0.32, \emph{SD\textsubscript{women}} =
+0.10, Cohen's \emph{d} = 5.10; partners: \emph{M\textsubscript{men}} =
+0.82, \emph{SD\textsubscript{men}} = 0.12, \emph{M\textsubscript{women}}
+= 0.25, \emph{SD\textsubscript{women}} = 0.07, Cohen's \emph{d} = 5.78).
+In comparison, virtually no gender differences in short-term mating
+behaviors existed when gay men and lesbian women had the same short-term
+mating likelihood and mating standards (Table 2).
 
 \begin{table}
 
@@ -656,7 +659,7 @@ Different likelihood*Different standard & 2.63 & 0.37 & 0.32 & 0.10 & 8.54 & 1.7
 \end{tabular}}
 \begin{tablenotes}
 \small
-\item \textit{Note.} \textit{N\textsubscript{m}} = \textit{N\textsubscript{w}} = 150 in all conditions.
+\item \textit{Note.} \textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150 in all conditions.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -664,36 +667,38 @@ Different likelihood*Different standard & 2.63 & 0.37 & 0.32 & 0.10 & 8.54 & 1.7
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-The present study aimed at using agent-based modeling to investigate
-whether men and women's different preferences for short-term mating
-resulted in any gender differences in short-term mating behaviors,
-specifically, in the number of short-term mating experiences and
-short-term mates, and if they did, under what circumstances. We raised
-two hypotheses: 1) gay men would engage in more short-term mating
-behaviors as compared to lesbian women, and 2) gay men would engage in
-more short-term mating behaviors as compared to heterosexual men. The
-results from 1,000 time steps in a model simulating men and women's
-mating behaviors supported our hypotheses. First of all, as compared to
-lesbian women, gay men had higher average numbers of short-term mating
-experiences and short-term mates. Secondly, gay men also had higher
-average numbers of short-term mating experiences and short-term mates as
-compared to heterosexual men. In contrast, we found no gender
-differences in short-term mating behaviors between heterosexual men and
-women, although heterosexual men in the mating pool did have higher
-average numbers of short-term mating experiences and short-term mates.
+The present study used agent-based modeling to investigate whether men
+and women's differential preferences for short-term mating would result
+in gender differences in short-term mating behaviors, and if so, then
+under what conditions they would result in differences in the number of
+short-term mating experiences and short-term mates. We formulated two
+hypotheses: 1) gay men would engage in more short-term mating behaviors
+as compared to lesbian women, and 2) gay men would engage in more
+short-term mating behaviors as compared to heterosexual men. The results
+from 1,000 time steps in a model simulating men and women's mating
+behaviors provided strong evidence in favor of our hypotheses. First of
+all, as compared to lesbian women, gay men had higher average numbers of
+short-term mating experiences and short-term mates. Secondly, gay men
+also had higher average numbers of short-term mating experiences and
+short-term mates as compared to heterosexual men. In contrast, we found
+no gender differences in short-term mating behaviors between
+heterosexual men and women, although heterosexual men in the mating pool
+had higher average numbers of short-term mating experiences and
+short-term mates.
 
-As we expected, heterosexual men and women did not differ in short-term
+As expected, heterosexual men and women did not differ in short-term
 mating behaviors despite their differential preferences for short-term
 mating. This was because heterosexual men and women had an equal total
-number of short-term mating experiences , so as the total number of
-short-term mates. Since the sex ratio was 1:1 in our model, the average
-number of short-term mating experiences and short-term mates must be
-equal between men and women as well. However, we did find that among
-individuals in the mating pool, men engaged in more short-term mating
-behaviors as compared to women. This was because there were more women
-than men in the mating pool, resulting in lower averages among
-heterosexual women despite the equal numbers of experiences and mates in
-total.
+number of both short-term mating experiences and short-term mates. This
+is not surprising since the sex ratio was 1:1 in our model. It therefore
+follows that the average number of short-term mating experiences and
+short-term mates must be equal between men and women as well. However,
+we did find that when we only looked at individuals in the mating pool
+(from which more men than women were excluded), men engaged in more
+short-term mating behaviors as compared to women. This was because there
+were more women than men in the mating pool, resulting in lower averages
+among heterosexual women despite the equal numbers of experiences and
+mates in total.
 
 Moreover, gender differences in short-term mating behaviors emerged when
 heterosexual men and women had different mating standards, but not when
@@ -704,70 +709,72 @@ them. This contributed to the unequal number of men and women in the
 mating pool, which led to gender differences in short-term mating
 behaviors among this population.
 
-In the light of these results, the empirical observation of gender
+In the light of these results, previous empirical observations of gender
 differences in short-term mating behaviors among heterosexual
-individuals (e.g., Petersen \& Hyde, 2010) appear to be perplexing
-because this is illogical (e.g., Gurman, 1989). Possible explanations
-for these empirical results have to highlight caveats in the observation
-process. One possibility is that there was sampling bias in the
-observations (e.g., Wiederman \& Dubois, 1998) since surveys regarding
-short-term mating behaviors may tend to attract individuals who already
-engage in such behaviors. Another possibility is that heterosexual men
-and women tend to report short-term mating behaviors differently. This
-difference may be a result of social desirability bias (Alexander \&
-Fisher, 2003) or due to men and women's different estimation strategies
-(e.g., men tend to round up) (Brown \& Sinclair, 1999).
+individuals (e.g., Petersen \& Hyde, 2010) appear perplexing (e.g.,
+Gurman, 1989). Possible explanations for these empirical results that
+seem illogical considering the simulation findings may have to do with
+features of the observation process. One possibility is sampling bias in
+the observations (e.g., Wiederman \& Dubois, 1998) since surveys
+regarding short-term mating behaviors may tend to attract individuals
+who already engage in such behaviors. Another possibility is that
+heterosexual men and women tend to report short-term mating behaviors
+differently. This difference may be a result of social desirability bias
+(Alexander \& Fisher, 2003) or due to men and women's different
+estimation strategies (e.g., men tend to round up) (Brown \& Sinclair,
+1999).
 
 Among gay men and lesbian women, large gender differences in short-term
 mating behaviors existed when men and women had differential preferences
 for short-term mating, which was in line with empirical observations
-(e.g., Peplau et al., 1997, 2004). This was probably because the number
-of short-term mating experiences and short-term mates no longer counted
+(e.g., Peplau et al., 1997, 2004). This was likely because the number of
+short-term mating experiences and short-term mates no longer counted
 towards men and women simultaneously. Any gender differences in mating
 preferences would result in differences in behaviors. A closer look at
-the results did support this postulation. Either a difference in the
-likelihood of short-term mating or a difference in mating standards
-alone could contribute to gender differences in mating behaviors. This
-was perhaps because the former increased the probability of both parties
-of a given gay couple deciding to have short-term mating, and the latter
-increased the probability of both of them meeting each other's
-standards, as compared to the case of a given lesbian couple.
+the results did support this postulation. Both a difference in the
+likelihood of short-term mating and in mating standards alone resulted
+in gender differences in mating behaviors. This was likely because the
+former increased the probability of both parties of a given gay couple
+deciding to have short-term mating, and the latter increased the
+probability of both meeting each other's standards, as compared to the
+case of a given lesbian couple.
 
-Supporting the idea that gay men's preferences for short-term mating
-were not constrained by those of women, we found that gay men engaged in
-more short-term mating behaviors as compared to heterosexual men. This
-was consistent with the empirical literature (e.g., Peplau et al.,
-1997). Interestingly, gay men and heterosexual men had the same mating
-likelihood and the same standards for short-term mates in our model. The
-only difference was a change in the preferences of potential partners.
-When men's partners had a stronger preferences for short-term mating
-(i.e., having men vs.~having women as potential partners), men also
-appeared to engage in more short-term mating behaviors.
+Also, as gay men's preferences for short-term mating were not
+constrained by those of women, we found that gay men engaged in more
+short-term mating behaviors compared to heterosexual men. This was
+consistent with the empirical literature (e.g., Peplau et al., 1997).
+Interestingly, gay men and heterosexual men had the same short-term
+mating likelihood and the same standards for short-term mates in our
+model. The only difference was a change in the preferences of potential
+partners. When men's partners had a stronger preferences for short-term
+mating (i.e., having men vs.~having women as potential partners), men
+also appeared to engage in more short-term mating behaviors.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-Using agent-based modeling, the present study theoretically explored the
+Using agent-based modeling, the present study simulated the
 circumstances under which men and women's differential preferences for
 short-term mating resulted in gender differences in short-term mating
 behaviors. We found when men (vs.~women) had a stronger preferences for
 short-term mating, heterosexual men and women engaged in short-term
 mating behaviors to the same extent, while gay men engaged in more
-short-term mating behaviors as compared to lesbian women. We also found
-that gay men engaged in more short-term mating behaviors than
-heterosexual men did. Theses results highlight the distinction between
-preferences and behaviors in human mating. Individuals' mating behaviors
-do not only depend on one's own preferences, but are also constrained by
-partners' preferences. Future research in human mating should not only
-focus on the psychological aspect but also pay attention to the
-interaction between individuals' psychology and its context. These
-results also cast doubt to the prevalent belief in the gender
-differences in short-term mating behaviors, especially among
-heterosexual individuals. Our findings suggest that there may be factors
-in the observation process, such as sampling bias, that lead to the
-observed differences. Future research in human sexuality should note
-such possibilities and interpret any observed gender differences in
-short-term mating behaviors cautiously.
+short-term mating behaviors as compared to lesbian women. Gay men
+engaged in more short-term mating behaviors than heterosexual men did.
+
+These results highlight the distinction between preferences and
+behaviors in human mating. Individuals' mating behaviors do not only
+depend on one's own preferences, but are also constrained by partners'
+preferences. Future research in human mating should not only focus on
+the psychological aspect but also pay attention to the interaction
+between individuals' psychology and its context. These results also cast
+doubt to the prevalent belief in the gender differences in short-term
+mating behaviors, especially among heterosexual individuals. Our
+findings suggest that there may be factors in the observation process,
+such as sampling bias, that contribute to the observed differences.
+Future research in human sexuality should note such possibilities and
+interpret any observed gender differences in short-term mating behaviors
+cautiously.
 
 \hypertarget{acknowledgements}{%
 \section{Acknowledgements}\label{acknowledgements}}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.11)  16 MAY 2022 17:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.11)  27 MAY 2022 21:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -584,30 +584,34 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {/Users/ellenying/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
+
+ []
+
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 181.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 183.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.184 \newpage
+l.186 \newpage
                [1] [2] [3] [4] [5]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 377.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 379.
 [6] [7] [8]
-<figures/fig1_men_vs_women.pdf, id=157, 361.35pt x 433.62pt>
+<figures/fig1_men_vs_women.pdf, id=156, 361.35pt x 433.62pt>
 File: figures/fig1_men_vs_women.pdf Graphic file (type pdf)
 <use figures/fig1_men_vs_women.pdf>
-Package pdftex.def Info: figures/fig1_men_vs_women.pdf  used on input line 512.
+Package pdftex.def Info: figures/fig1_men_vs_women.pdf  used on input line 516.
 (pdftex.def)             Requested size: 284.53156pt x 341.43785pt.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 513.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 517.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 513.
+(Font)              <10> on input line 517.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 513.
+(Font)              <7> on input line 517.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 513.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 517.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -615,35 +619,35 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figures/fig2_hetero_vs_gay_men.pdf, id=176, 650.43pt x 361.35pt>
 File: figures/fig2_hetero_vs_gay_men.pdf Graphic file (type pdf)
 <use figures/fig2_hetero_vs_gay_men.pdf>
-Package pdftex.def Info: figures/fig2_hetero_vs_gay_men.pdf  used on input line 561.
+Package pdftex.def Info: figures/fig2_hetero_vs_gay_men.pdf  used on input line 564.
 (pdftex.def)             Requested size: 375.81058pt x 208.78365pt.
-
-Overfull \hbox (19.86847pt too wide) in paragraph at lines 594--614
- [] 
- []
-
 [11 <./figures/fig2_hetero_vs_gay_men.pdf>]
-Overfull \hbox (25.95659pt too wide) in paragraph at lines 642--662
+Overfull \hbox (19.86847pt too wide) in paragraph at lines 597--617
  [] 
  []
 
-[12] [13] [14] [15] [16] [17] [18] (./manuscript.aux)
+
+Overfull \hbox (25.95659pt too wide) in paragraph at lines 645--665
+ [] 
+ []
+
+[12] [13] [14] [15] [16] [17] [18] [19] (./manuscript.aux)
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: 5AC2CB255A5DD92C51ABFF0B74C2274B;4231.
+(rerunfilecheck)             Checksum: 33AB067767CCD7859E6327937A701F74;4231.
  ) 
 Here is how much of TeX's memory you used:
- 13837 strings out of 480260
- 224947 string characters out of 5893340
- 520064 words of memory out of 5000000
+ 13838 strings out of 480260
+ 224998 string characters out of 5893340
+ 522086 words of memory out of 5000000
  31402 multiletter control sequences out of 15000+600000
  533804 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,21n,63p,854b,469s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 60i,21n,63p,860b,469s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on manuscript.pdf (19 pages, 156915 bytes).
+Output written on manuscript.pdf (20 pages, 157672 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 298 compressed objects within 3 object streams
- 103 named destinations out of 1000 (max. 500000)
+ 339 PDF objects out of 1000 (max. 8388607)
+ 301 compressed objects within 4 object streams
+ 104 named destinations out of 1000 (max. 500000)
  195 words of extra memory for PDF output out of 10000 (max. 10000000)
 
