@@ -2,14 +2,14 @@
 
 # name: plot_hetero_vs_gay_men.R
 # input: data/processed/casual_sex_sim.csv
-# output: submission/figures/fig2_hetero_vs_gay_men.pdf
+# output: submission/figures/fig3_hetero_vs_gay_men.pdf
 # notes: none
 
 # load libraries
 library(tidyverse); library(ggplot2); library(wesanderson); library(here)
 
 args <- commandArgs(trailingOnly = TRUE)
-#args <- c("data/processed/casual_sex_sim.csv", "submission/figures/fig2_hetero_vs_gay_men.pdf")
+#args <- c("data/processed/casual_sex_sim.csv", "submission/figures/fig3_hetero_vs_gay_men.pdf")
 
 input_file <- args[1]
 output_file <- args[2]
