@@ -23,6 +23,8 @@ header-includes:
 ```{r set_up, include=FALSE}
 library(tidyverse); library(here); library(knitr); library(kableExtra)
 
+N <- 150
+
 results <-
   here("data/processed/des_and_test_result.csv") %>%
   read_csv() %>%
@@ -217,12 +219,13 @@ partner_all.d_011 <-
   results %>% filter(hls == "0_1_1") %>% pull(partner_all.d) %>% abs()
 ```
 
-The results from Experiment 1 showed that when there were gender differences in preferences for short-term mating, there was no gender difference in the average number of short-term mating experiences among heterosexual individuals (*M~men~* = `r m_exp_all.mean_011`, *SD~men~* = `r m_exp_all.sd_011`; *M~women~* = `r f_exp_all.mean_011`, *SD~women~* = `r f_exp_all.sd_011`), Cohen's *d* = `r exp_all.d_011`. Nor was there a difference in the average number of short-term mates (*M~men~* = `r m_partner_all.mean_011`, *SD~men~* = `r m_partner_all.sd_011`; *M~women~* = `r f_partner_all.mean_011`, *SD~women~* = `r f_partner_all.sd_011`), Cohen's *d* = `r partner_all.d_011` (Figure 1).
+The results from Experiment 1 showed that when there were gender differences in preferences for short-term mating, there was no gender difference in the average number of short-term mating experiences among the full population of heterosexual individuals (*M~men~* = `r m_exp_all.mean_011`, *SD~men~* = `r m_exp_all.sd_011`; *M~women~* = `r f_exp_all.mean_011`, *SD~women~* = `r f_exp_all.sd_011`), Cohen's *d* = `r exp_all.d_011`. Nor was there a difference in the average number of short-term mates (*M~men~* = `r m_partner_all.mean_011`, *SD~men~* = `r m_partner_all.sd_011`; *M~women~* = `r f_partner_all.mean_011`, *SD~women~* = `r f_partner_all.sd_011`), Cohen's *d* = `r partner_all.d_011` (Figure \ref{fig:men_vs_women}).
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=100mm]{figures/fig1_men_vs_women.pdf}
   \caption{\textbf{Short-term mating behaviors of men and women after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables separately for heterosexual individuals and gay men and lesbian women. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. The averages were calculated using the full population of men and women in the model (\textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150).}
+  \label{fig:men_vs_women}
 \end{figure}
 
 ```{r sec1.2}
@@ -263,12 +266,30 @@ partner_all.d_111 <-
   results %>% filter(hls == "1_1_1") %>% pull(partner_all.d) %>% abs()
 ```
 
-The results from Experiment 2 showed that when there were gender differences in preferences for short-term mating, there were gender differences in short-term mating behaviors between gay men and lesbian women (Figure 1). The average number of short-term mating experiences was higher among gay men (*M* = `r m_exp_all.mean_111`, *SD* = `r m_exp_all.sd_111`) than among lesbian women (*M* = `r f_exp_all.mean_111`, *SD* = `r f_exp_all.sd_111`), *t*(`r exp.all.parameter_111`) = `r exp.all.statistic_111`, *p* `r exp.all.p.value_111`, Cohen's *d* = `r exp_all.d_111`. Similarly, the average number of short-term mates was higher among gay men (*M* = `r m_partner_all.mean_111`, *SD* = `r m_partner_all.sd_111`) than among lesbian women (*M* = `r f_partner_all.mean_111`, *SD* = `r f_partner_all.sd_111`), *t*(`r partner.all.parameter_111`) = `r partner.all.statistic_111`, *p* `r partner.all.p.value_111`, Cohen's *d* = `r partner_all.d_111`.
+The results from Experiment 2 showed that when there were gender differences in preferences for short-term mating, there were gender differences in short-term mating behaviors between gay men and lesbian women (Figure \ref{fig:men_vs_women}). The average number of short-term mating experiences was higher among gay men (*M* = `r m_exp_all.mean_111`, *SD* = `r m_exp_all.sd_111`) than among lesbian women (*M* = `r f_exp_all.mean_111`, *SD* = `r f_exp_all.sd_111`), *t*(`r exp.all.parameter_111`) = `r exp.all.statistic_111`, *p* `r exp.all.p.value_111`, Cohen's *d* = `r exp_all.d_111`. Similarly, the average number of short-term mates was higher among gay men (*M* = `r m_partner_all.mean_111`, *SD* = `r m_partner_all.sd_111`) than among lesbian women (*M* = `r f_partner_all.mean_111`, *SD* = `r f_partner_all.sd_111`), *t*(`r partner.all.parameter_111`) = `r partner.all.statistic_111`, *p* `r partner.all.p.value_111`, Cohen's *d* = `r partner_all.d_111`.
 
 
 ## Heterosexual individuals in the mating pool
 
-```{r sec2.2}
+```{r sec2}
+# the number of in-pool, difference*2
+m_inpool.mean_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(m_inpool.mean)
+m_inpool.sd_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(m_inpool.sd)
+f_inpool.mean_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(f_inpool.mean)
+f_inpool.sd_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(f_inpool.sd)
+inpool.parameter_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(inpool.parameter)
+inpool.statistic_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(inpool.statistic)
+inpool.p.value_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(inpool.p.value)
+inpool.d_011 <-
+  results %>% filter(hls == "0_1_1") %>% pull(inpool.d) %>% abs()
+
 # the number of experiences, difference*2, heterosexual in the mating pool
 m_exp_ip.mean_011 <-
   results %>% filter(hls == "0_1_1") %>% pull(m_exp_ip.mean)
@@ -304,23 +325,13 @@ partner_ip.p.value_011 <-
   results %>% filter(hls == "0_1_1") %>% pull(partner_ip.p.value)
 partner_ip.d_011 <-
   results %>% filter(hls == "0_1_1") %>% pull(partner_ip.d) %>% abs()
-
-# the number of in-pool, difference*2
-m_inpool.mean_011 <-
-  results %>% filter(hls == "0_1_1") %>% pull(m_inpool.mean)
-m_inpool.sd_011 <-
-  results %>% filter(hls == "0_1_1") %>% pull(m_inpool.sd)
-f_inpool.mean_011 <-
-  results %>% filter(hls == "0_1_1") %>% pull(f_inpool.mean)
-f_inpool.sd_011 <-
-  results %>% filter(hls == "0_1_1") %>% pull(f_inpool.sd)
 ```
 
-In Experiment 1, however, when the means of the outcome variables were calculated only among men and women in the mating pool (the number of individuals in the mating pool: *M~men~* = `r m_inpool.mean_011`, *SD~men~* = `r m_inpool.sd_011`; *M~women~* = `r f_inpool.mean_011`, *SD~women~* = `r f_inpool.sd_011`), there were gender differences in short-term mating behaviors when men and women had differential preferences for short-term mating. The average number of short-term mating experiences was higher among heterosexual men (*M* = `r m_exp_ip.mean_011`, *SD* = `r m_exp_ip.sd_011`) than among heterosexual women (*M* = `r f_exp_ip.mean_011`, *SD* = `r f_exp_ip.sd_011`), *t*(`r exp_ip.parameter_011`) = `r exp_ip.statistic_011`, *p* `r exp_ip.p.value_011`, Cohen's *d* = `r exp_ip.d_011`. Likewise, the average number of short-term mates was higher among heterosexual men (*M* = `r m_partner_ip.mean_011`, *SD* = `r m_partner_ip.sd_011`) than among heterosexual women (*M* = `r f_partner_ip.mean_011`, *SD* = `r f_partner_ip.sd_011`), *t*(`r partner_ip.parameter_011`) = `r partner_ip.statistic_011`, *p* `r partner_ip.p.value_011`, Cohen's *d* = `r partner_ip.d_011`.
+In Experiment 1, there was a smaller proportion of heterosexual men in the mating pool (*M* = `r m_inpool.mean_011/N`, *SD* = `r m_inpool.sd_011/N`) compared to women (*M* = `r f_inpool.mean_011/N`, *SD* = `r f_inpool.sd_011/N`)), *t*(`r inpool.parameter_011`) = `r inpool.statistic_011`, *p* `r inpool.p.value_011`, Cohen's *d* = `r inpool.d_011`. In this population, there were gender differences in short-term mating behaviors when men and women had differential preferences for short-term mating (Figure **x**). The average number of short-term mating experiences was higher among heterosexual men (*M* = `r m_exp_ip.mean_011`, *SD* = `r m_exp_ip.sd_011`) than among heterosexual women (*M* = `r f_exp_ip.mean_011`, *SD* = `r f_exp_ip.sd_011`), *t*(`r exp_ip.parameter_011`) = `r exp_ip.statistic_011`, *p* `r exp_ip.p.value_011`, Cohen's *d* = `r exp_ip.d_011`. Likewise, the average number of short-term mates was higher among heterosexual men (*M* = `r m_partner_ip.mean_011`, *SD* = `r m_partner_ip.sd_011`) than among heterosexual women (*M* = `r f_partner_ip.mean_011`, *SD* = `r f_partner_ip.sd_011`), *t*(`r partner_ip.parameter_011`) = `r partner_ip.statistic_011`, *p* `r partner_ip.p.value_011`, Cohen's *d* = `r partner_ip.d_011`.
 
 ## Comparing heterosexual and gay men
 
-```{r sec2}
+```{r sec3}
 # the number of experiences, difference*2, heterosexual and gay men
 m_exp_all.mean_0_11 <-
   results_hg %>% filter(ls == "1_1") %>% pull(m_exp_all.mean_0)
@@ -358,19 +369,20 @@ partner_all.d_hg <-
   results_hg %>% filter(ls == "1_1") %>% pull(m_partner_all.d) %>% abs()
 ```
 
-Gay men engaged in short-term mating behaviors more than heterosexual men did (Figure 2). The average number of short-term mating experiences (as calculated using the full population of men) was higher among gay men (*M* = `r m_exp_all.mean_1_11`, *SD* = `r m_exp_all.sd_1_11`) than among heterosexual men (*M* = `r m_exp_all.mean_0_11`, *SD* = `r m_exp_all.sd_0_11`), *t*(`r exp.all.parameter_hg`) = `r exp.all.statistic_hg`, *p* `r exp.all.p.value_hg`, Cohen's *d* = `r exp_all.d_hg`. Similarly, the average number of short-term mates (as calculated using the full population of men) was higher among gay men (*M* = `r m_partner_all.mean_1_11`, *SD* = `r m_partner_all.sd_1_11`) than among heterosexual men (*M* = `r m_partner_all.mean_0_11`, *SD* = `r m_partner_all.sd_0_11`), *t*(`r partner.all.parameter_hg`) = `r partner.all.statistic_hg`, *p* `r partner.all.p.value_hg`, Cohen's *d* = `r partner_all.d_hg`.
+Gay men engaged in short-term mating behaviors more than heterosexual men did (Figure \ref{fig:hetero_vs_gay}). The average number of short-term mating experiences (as calculated using the full population of men) was higher among gay men (*M* = `r m_exp_all.mean_1_11`, *SD* = `r m_exp_all.sd_1_11`) than among heterosexual men (*M* = `r m_exp_all.mean_0_11`, *SD* = `r m_exp_all.sd_0_11`), *t*(`r exp.all.parameter_hg`) = `r exp.all.statistic_hg`, *p* `r exp.all.p.value_hg`, Cohen's *d* = `r exp_all.d_hg`. Similarly, the average number of short-term mates (as calculated using the full population of men) was higher among gay men (*M* = `r m_partner_all.mean_1_11`, *SD* = `r m_partner_all.sd_1_11`) than among heterosexual men (*M* = `r m_partner_all.mean_0_11`, *SD* = `r m_partner_all.sd_0_11`), *t*(`r partner.all.parameter_hg`) = `r partner.all.statistic_hg`, *p* `r partner.all.p.value_hg`, Cohen's *d* = `r partner_all.d_hg`.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\columnwidth]{figures/fig2_hetero_vs_gay_men.pdf}
+  \includegraphics[width=0.8\columnwidth]{figures/fig3_hetero_vs_gay_men.pdf}
   \caption{\textbf{Short-term mating behaviors of heterosexual and gay men after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. The averages were calculated using the full population of heterosexual and gay men in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).}
+  \label{fig:hetero_vs_gay}
 \end{figure}
 
 ## Comparing across conditions
 
 We also ran analyses across conditions to see which of the two dimensions of mating preferences contributed to gender differences in short-term mating behaviors.
 
-```{r sec3.1}
+```{r sec4.1}
 # the number of experiences, difference in standard, heterosexual
 m_exp_ip.mean_001 <-
   results %>% filter(hls == "0_0_1") %>% pull(m_exp_ip.mean)
@@ -442,7 +454,7 @@ results %>%
   kable_styling(latex_options = "scale_down")
 ```
 
-```{r sec3.2}
+```{r sec4.2}
 # the number of experiences, difference in likelihood, gay and lesbian
 m_exp_all.mean_110 <-
   results %>% filter(hls == "1_1_0") %>% pull(m_exp_all.mean)
