@@ -81,7 +81,7 @@ knit_hooks$set(inline = inline_hook)
 
 \vspace{30mm}
 
-Yurun Ying^1^, Jan Antfolk^2^, Pekka Santtila^1^^,^^3^^,^^$\dagger$^
+Yurun Ying^1^^,^^$\dagger$^, Jan Antfolk^2^, Pekka Santtila^1^^,^^3^
 
 ^1^ Faculty of Arts and Sciences, NYU Shanghai
 
@@ -93,7 +93,7 @@ Yurun Ying^1^, Jan Antfolk^2^, Pekka Santtila^1^^,^^3^^,^^$\dagger$^
 
 \vspace{40mm}
 
-^$\dagger$^ To whom correspondence should be addressed: [pekka.santtila@nyu.edu](pekka.santtila@nyu.edu)
+^$\dagger$^ To whom correspondence should be addressed: [yurun.ying@nyu.edu](yurun.ying@nyu.edu)
 
 \etitlepage
 
@@ -327,7 +327,15 @@ partner_ip.d_011 <-
   results %>% filter(hls == "0_1_1") %>% pull(partner_ip.d) %>% abs()
 ```
 
-In Experiment 1, there was a smaller proportion of heterosexual men in the mating pool (*M* = `r m_inpool.mean_011/N`, *SD* = `r m_inpool.sd_011/N`) compared to women (*M* = `r f_inpool.mean_011/N`, *SD* = `r f_inpool.sd_011/N`)), *t*(`r inpool.parameter_011`) = `r inpool.statistic_011`, *p* `r inpool.p.value_011`, Cohen's *d* = `r inpool.d_011`. In this population, there were gender differences in short-term mating behaviors when men and women had differential preferences for short-term mating (Figure **x**). The average number of short-term mating experiences was higher among heterosexual men (*M* = `r m_exp_ip.mean_011`, *SD* = `r m_exp_ip.sd_011`) than among heterosexual women (*M* = `r f_exp_ip.mean_011`, *SD* = `r f_exp_ip.sd_011`), *t*(`r exp_ip.parameter_011`) = `r exp_ip.statistic_011`, *p* `r exp_ip.p.value_011`, Cohen's *d* = `r exp_ip.d_011`. Likewise, the average number of short-term mates was higher among heterosexual men (*M* = `r m_partner_ip.mean_011`, *SD* = `r m_partner_ip.sd_011`) than among heterosexual women (*M* = `r f_partner_ip.mean_011`, *SD* = `r f_partner_ip.sd_011`), *t*(`r partner_ip.parameter_011`) = `r partner_ip.statistic_011`, *p* `r partner_ip.p.value_011`, Cohen's *d* = `r partner_ip.d_011`.
+In Experiment 1, there was a smaller proportion of heterosexual men in the mating pool (*M* = `r m_inpool.mean_011/N`, *SD* = `r m_inpool.sd_011/N`) compared to women (*M* = `r f_inpool.mean_011/N`, *SD* = `r f_inpool.sd_011/N`), *t*(`r inpool.parameter_011`) = `r inpool.statistic_011`, *p* `r inpool.p.value_011`, Cohen's *d* = `r inpool.d_011`. In this population, there were gender differences in short-term mating behaviors when men and women had differential preferences for short-term mating (Figure \ref{fig:men_vs_women_inpool}). The average number of short-term mating experiences was higher among heterosexual men (*M* = `r m_exp_ip.mean_011`, *SD* = `r m_exp_ip.sd_011`) than among heterosexual women (*M* = `r f_exp_ip.mean_011`, *SD* = `r f_exp_ip.sd_011`), *t*(`r exp_ip.parameter_011`) = `r exp_ip.statistic_011`, *p* `r exp_ip.p.value_011`, Cohen's *d* = `r exp_ip.d_011`. Likewise, the average number of short-term mates was higher among heterosexual men (*M* = `r m_partner_ip.mean_011`, *SD* = `r m_partner_ip.sd_011`) than among heterosexual women (*M* = `r f_partner_ip.mean_011`, *SD* = `r f_partner_ip.sd_011`), *t*(`r partner_ip.parameter_011`) = `r partner_ip.statistic_011`, *p* `r partner_ip.p.value_011`, Cohen's *d* = `r partner_ip.d_011`.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{figures/fig2_men_vs_women_inpool.pdf}
+  \caption{\textbf{Short-term mating behaviors of heterosexual men and women in the mating pool after 1,000 time steps in the model when gender differences existed in mating preferences.} Violin plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences in the mating pool, and plot (B) shows the average number of short-term mates in the mating pool. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar. The averages were calculated using the population of heterosexual men and women in the mating pool (\textit{M\textsubscript{men}} = `r m_inpool.mean_011`, \textit{M\textsubscript{men}} = `r f_inpool.mean_011`).}
+  \label{fig:men_vs_women_inpool}
+\end{figure}
+
 
 ## Comparing heterosexual and gay men
 

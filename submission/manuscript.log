@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.11)  1 JUN 2022 15:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.1)  1 JUN 2022 16:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **manuscript.tex
 (./manuscript.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-05-04> (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2022-05-30> (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/base/size11.clo
 File: size11.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -352,7 +352,7 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \c@nlinenum=\count299
 \TeXr@lab=\toks34
 ) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
+Package: hyperref 2022-05-17 v7.00q Hypertext links for LaTeX
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -375,14 +375,22 @@ Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+(/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+(/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+))
+\c@section@level=\count300
 )
 \@linkdim=\dimen258
-\Hy@linkcounter=\count300
-\Hy@pagecounter=\count301
+\Hy@linkcounter=\count301
+\Hy@pagecounter=\count302
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2022-05-17 v7.00q Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 ) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
@@ -390,61 +398,61 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count302
+\Hy@SavedSpaceFactor=\count303
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2022-05-17 v7.00q Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4018.
-Package hyperref Info: Hyper figures OFF on input line 4137.
-Package hyperref Info: Link nesting OFF on input line 4142.
-Package hyperref Info: Hyper index ON on input line 4145.
-Package hyperref Info: Plain pages OFF on input line 4152.
-Package hyperref Info: Backreferencing OFF on input line 4157.
+Package hyperref Info: Option `unicode' set `true' on input line 4020.
+Package hyperref Info: Hyper figures OFF on input line 4139.
+Package hyperref Info: Link nesting OFF on input line 4144.
+Package hyperref Info: Hyper index ON on input line 4147.
+Package hyperref Info: Plain pages OFF on input line 4154.
+Package hyperref Info: Backreferencing OFF on input line 4159.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4390.
-\c@Hy@tempcnt=\count303
+Package hyperref Info: Bookmarks ON on input line 4385.
+\c@Hy@tempcnt=\count304
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4749.
+LaTeX Info: Redefining \url on input line 4723.
 \XeTeXLinkMargin=\dimen259
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count304
+\Fld@menulength=\count305
 \Field@Width=\dimen260
 \Fld@charsize=\dimen261
-Package hyperref Info: Hyper figures OFF on input line 6027.
-Package hyperref Info: Link nesting OFF on input line 6032.
-Package hyperref Info: Hyper index ON on input line 6035.
-Package hyperref Info: backreferencing OFF on input line 6042.
-Package hyperref Info: Link coloring OFF on input line 6047.
-Package hyperref Info: Link coloring with OCG OFF on input line 6052.
-Package hyperref Info: PDF/A mode OFF on input line 6057.
-LaTeX Info: Redefining \ref on input line 6097.
-LaTeX Info: Redefining \pageref on input line 6101.
+Package hyperref Info: Hyper figures OFF on input line 6001.
+Package hyperref Info: Link nesting OFF on input line 6006.
+Package hyperref Info: Hyper index ON on input line 6009.
+Package hyperref Info: backreferencing OFF on input line 6016.
+Package hyperref Info: Link coloring OFF on input line 6021.
+Package hyperref Info: Link coloring with OCG OFF on input line 6026.
+Package hyperref Info: PDF/A mode OFF on input line 6031.
+LaTeX Info: Redefining \ref on input line 6078.
+LaTeX Info: Redefining \pageref on input line 6078.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count305
-\c@Item=\count306
-\c@Hfootnote=\count307
+\Hy@abspage=\count306
+\c@Item=\count307
+\c@Hfootnote=\count308
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2022-02-21 v7.00n Hyperref driver for pdfTeX
+File: hpdftex.def 2022-05-17 v7.00q Hyperref driver for pdfTeX
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count308
-\c@bookmark@seq@number=\count309
+\Fld@listcount=\count309
+\c@bookmark@seq@number=\count310
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -459,7 +467,7 @@ LaTeX Font Info:    Trying to load font information for T1+phv on input line 114
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 ) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count310
+\l__color_backend_stack_int=\count311
 \l__pdf_internal_box=\box71
 ) (./manuscript.aux)
 \openout1 = `manuscript.aux'.
@@ -533,18 +541,6 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring OFF on input line 114.
-(/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
-(/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-)
-\c@section@level=\count311
-)
-LaTeX Info: Redefining \ref on input line 114.
-LaTeX Info: Redefining \pageref on input line 114.
-LaTeX Info: Redefining \nameref on input line 114.
 (./manuscript.out) (./manuscript.out)
 \@outlinefile=\write3
 \openout3 = `manuscript.out'.
@@ -580,7 +576,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 132.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 133.
+(Font)              <5> on input line 132.
 [1
 
 {/Users/ellenying/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -615,39 +611,51 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[10] [11 <./figures/fig1_men_vs_women.pdf>]
-<figures/fig3_hetero_vs_gay_men.pdf, id=188, 650.43pt x 361.35pt>
+[10]
+<figures/fig2_men_vs_women_inpool.pdf, id=177, 650.43pt x 361.35pt>
+File: figures/fig2_men_vs_women_inpool.pdf Graphic file (type pdf)
+<use figures/fig2_men_vs_women_inpool.pdf>
+Package pdftex.def Info: figures/fig2_men_vs_women_inpool.pdf  used on input line 597.
+(pdftex.def)             Requested size: 375.81058pt x 208.78365pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[11 <./figures/fig1_men_vs_women.pdf>]
+<figures/fig3_hetero_vs_gay_men.pdf, id=191, 650.43pt x 361.35pt>
 File: figures/fig3_hetero_vs_gay_men.pdf Graphic file (type pdf)
 <use figures/fig3_hetero_vs_gay_men.pdf>
-Package pdftex.def Info: figures/fig3_hetero_vs_gay_men.pdf  used on input line 612.
+Package pdftex.def Info: figures/fig3_hetero_vs_gay_men.pdf  used on input line 620.
 (pdftex.def)             Requested size: 375.81058pt x 208.78365pt.
-[12 <./figures/fig3_hetero_vs_gay_men.pdf>]
-Overfull \hbox (19.86847pt too wide) in paragraph at lines 646--666
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[12 <./figures/fig2_men_vs_women_inpool.pdf>]
+Overfull \hbox (19.86847pt too wide) in paragraph at lines 654--674
  [] 
  []
 
-
-Overfull \hbox (25.95659pt too wide) in paragraph at lines 694--714
+[13 <./figures/fig3_hetero_vs_gay_men.pdf>]
+Overfull \hbox (25.95659pt too wide) in paragraph at lines 702--722
  [] 
  []
 
-[13] [14] [15] [16] [17] [18] [19] [20] (./manuscript.aux)
+[14] [15] [16] [17] [18] [19] [20] [21] (./manuscript.aux)
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: 78C3F351AEA48282B1B5041A442B86FE;4646.
+(rerunfilecheck)             Checksum: 150C9D1D848CBBF00DB87D49D1F504E6;4647.
  ) 
 Here is how much of TeX's memory you used:
- 13847 strings out of 480260
- 225239 string characters out of 5893340
- 523489 words of memory out of 5000000
- 31406 multiletter control sequences out of 15000+600000
+ 13873 strings out of 480253
+ 226081 string characters out of 5893183
+ 525005 words of memory out of 5000000
+ 31435 multiletter control sequences out of 15000+600000
  533804 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,21n,63p,862b,469s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,21n,77p,883b,469s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on manuscript.pdf (21 pages, 161490 bytes).
+Output written on manuscript.pdf (22 pages, 188062 bytes).
 PDF statistics:
- 353 PDF objects out of 1000 (max. 8388607)
- 314 compressed objects within 4 object streams
- 109 named destinations out of 1000 (max. 500000)
- 203 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 366 PDF objects out of 1000 (max. 8388607)
+ 324 compressed objects within 4 object streams
+ 111 named destinations out of 1000 (max. 500000)
+ 208 words of extra memory for PDF output out of 10000 (max. 10000000)
 
