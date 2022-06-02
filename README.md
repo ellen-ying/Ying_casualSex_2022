@@ -5,10 +5,10 @@ Yurun (Ellen) Ying
 
 ## Description
 
-By using a spatial agent-based model, the present study investigated we
-investigated whether men and women’s different mating preferences
-resulted in any gender differences in short-term mating behaviors, and
-if they did, under what circumstances.
+By using a spatial agent-based model, the present study investigated
+whether men and women’s different mating preferences resulted in any
+gender differences in short-term mating behaviors, and if they did,
+under what circumstances.
 
 ### Dependencies:
 
@@ -33,7 +33,7 @@ if they did, under what circumstances.
     ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
-    ## [1] C/UTF-8/C/C/C/C
+    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     

@@ -8,14 +8,13 @@ output:
 ---
 
 ## Description
-By using a spatial agent-based model, the present study investigated we investigated whether men and women's different mating preferences resulted in any gender differences in short-term mating behaviors, and if they did, under what circumstances.
+By using a spatial agent-based model, the present study investigated whether men and women's different mating preferences resulted in any gender differences in short-term mating behaviors, and if they did, under what circumstances.
 
 ```{r library_calls, message=FALSE, echo=FALSE}
 library(tidyverse)
 library(here)
 library(broom)
 library(effectsize)
-library(ggplot2)
 library(rmarkdown)
 library(knitr)
 library(kableExtra)
