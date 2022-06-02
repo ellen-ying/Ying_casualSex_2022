@@ -39,7 +39,8 @@ casual_des <-
   group_by(homosexual_dlikelihood_dstandard, gender) %>% 
   summarise(across(inpool:partner_ip, 
                    list(mean = mean, sd = sd),
-                   .names = "{.col}.{.fn}")) %>% 
+            .names = "{.col}.{.fn}"),
+            .groups = "drop") %>% 
   pivot_wider(names_from = gender, 
               values_from = -c(homosexual_dlikelihood_dstandard, gender),
               names_glue = "{gender}_{.value}")
@@ -50,18 +51,18 @@ casual_t_test <-
   nest_by(homosexual_dlikelihood_dstandard) %>% 
   mutate(
     inpool = t.test(inpool ~ gender, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     outpool = t.test(outpool ~ gender, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     exp_all = t.test(exp_all ~ gender, data = data, var.equal = TRUE) %>% tidy() %>% 
       # somehow the map function doesn't work here and I wonder why...
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     exp_ip = t.test(exp_ip ~ gender, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     partner_all = t.test(partner_all ~ gender, data = data , var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     partner_ip = t.test(partner_ip ~ gender, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter)
+      select(statistic, p.value, parameter, conf.low, conf.high)
   ) %>% 
   select(-data) %>% 
   unnest(cols = -homosexual_dlikelihood_dstandard, names_sep = ".")

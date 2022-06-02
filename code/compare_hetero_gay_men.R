@@ -48,18 +48,18 @@ casual_t_test <-
   nest_by(dlikelihood_dstandard) %>% 
   mutate(
     m_inpool = t.test(m_inpool ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     m_outpool = t.test(m_outpool ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     m_exp_all = t.test(m_exp_all ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
       # somehow the map function doesn't work here and I wonder why...
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     m_exp_ip = t.test(m_exp_ip ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     m_partner_all = t.test(m_partner_all ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter),
+      select(statistic, p.value, parameter, conf.low, conf.high),
     m_partner_ip = t.test(m_partner_ip ~ homosexual, data = data, var.equal = TRUE) %>% tidy() %>% 
-      select(statistic, p.value, parameter)
+      select(statistic, p.value, parameter, conf.low, conf.high)
   ) %>% 
   select(-data) %>% 
   unnest(cols = -dlikelihood_dstandard, names_sep = ".")
