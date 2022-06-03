@@ -36,7 +36,7 @@ submission/figures/fig3_hetero_vs_gay_men.pdf : code/plot_hetero_vs_gay_men.R\
 data/processed/casual_sex_sim.csv
 	$^ $@
 
-submission/manuscript.* : submission/manuscript.Rmd\
+submission/manuscript.pdf : submission/manuscript.Rmd\
 data/processed/des_and_test_result.csv\
 data/processed/compare_hetero_gay_men.csv\
 submission/figures/fig1_men_vs_women.pdf\
