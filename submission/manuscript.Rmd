@@ -501,7 +501,7 @@ results %>%
     ) %>%
   column_spec(1, width = "2in") %>%
   footnote(
-    general = "\\\\textit{Note.} The averages were calculated with subsamples of men and women who had had engaged in short-term mating behaviors. See Supplementary Materials for the mean and standard deviation of sample sizes.",
+    general = "\\\\textit{Note.} The averages were calculated with subsamples of men and women who had had engaged in short-term mating behaviors. See Supplemental Materials for the mean and standard deviation of sample sizes.",
     general_title = "", escape = FALSE,
     threeparttable = TRUE, fixed_small_size = TRUE) %>%
   kable_styling(latex_options = "scale_down")
