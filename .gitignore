@@ -11,3 +11,6 @@ models/casual_sex*
 submission/supplemental/
 submission/supplemental_materials.aux
 submission/supplemental_materials.out
+submission/manuscript.out
+submission/manuscript.aux
+submission/manuscript.log
