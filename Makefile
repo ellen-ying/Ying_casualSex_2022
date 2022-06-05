@@ -44,3 +44,8 @@ submission/figures/fig2_men_vs_women_inpool.pdf\
 submission/figures/fig3_hetero_vs_gay_men.pdf\
 submission/reference.bib
 	R -e "rmarkdown::render('submission/manuscript.Rmd', output_format = 'all', output_options = list())"
+
+submission/supplemental_materials.pdf : submission/supplemental_materials.Rmd\
+data/processed/des_and_test_result.csv\
+submission/reference.bib
+	R -e "rmarkdown::render('submission/supplemental_materials.Rmd')"

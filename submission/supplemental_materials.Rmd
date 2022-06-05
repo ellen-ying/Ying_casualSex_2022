@@ -1,0 +1,209 @@
+---
+output:
+  pdf_document
+geometry: margin=1.0in
+fontsize: 11pt
+numbersections: false
+indent: true
+bibliography: reference.bib
+csl: evolution-and-human-behavior.csl
+header-includes:
+  - \newcommand{\bcenter}{\begin{center}}
+  - \newcommand{\ecenter}{\end{center}}
+  - \newcommand{\btitlepage}{\begin{titlepage}}
+  - \newcommand{\etitlepage}{\end{titlepage}}
+  - \usepackage{setspace}\doublespacing
+  - \usepackage{helvet}
+  - \renewcommand*\familydefault{\sfdefault}
+  - \usepackage{booktabs}
+  - \usepackage[font=small,labelfont=bf]{caption}
+  - \usepackage{indentfirst}
+  - \pagenumbering{gobble}
+---
+
+```{r set_up, include=FALSE}
+library(tidyverse); library(here); library(knitr); library(kableExtra)
+
+options(knitr.kable.NA = '')
+
+results_inpool <-
+  here("data/processed/des_and_test_result.csv") %>%
+  read_csv() %>%
+  rename(hls = homosexual_dlikelihood_dstandard) %>%
+  mutate(across(.col = c(f_inpool.mean:m_outpool.sd,
+                inpool.conf.low:inpool.conf.high,
+                outpool.conf.low:outpool.conf.high),
+                ~ .x/150)) %>%
+  select(hls, m_inpool.mean, m_inpool.sd, f_inpool.mean, f_inpool.sd) %>% 
+  filter(str_detect(hls, "^0"))
+
+# define inline hook
+inline_hook <- function(x) {
+
+    if (is.numeric(x)) {
+
+      formatted <- ifelse(
+        abs(x - round(x)) < .Machine$double.eps & x != 0,
+        # treat as integer
+        format(x, digits=0, big.mark = ","),
+        # treat as floating point number
+        format(x, digits=1, nsmall=2, big.mark = ",")
+        ) %>%
+        str_replace("-", "–")
+
+    } else {
+
+      formatted <- x
+
+    }
+
+}
+
+knit_hooks$set(inline = inline_hook)
+```
+
+\btitlepage
+
+\bcenter
+
+\vspace*{30mm}
+
+# Supplemental Materials to "An Agent-Based Model of Gender and Sexual Orientation Differences in Short-Term Mating Behaviors as a Result of Mating Preferences"
+
+\ecenter
+
+\etitlepage
+
+\newpage
+
+\bcenter
+
+## Overview, Design Concepts, and Details of the Model
+
+\ecenter
+
+This description of the model follows the standard ODD protocol of reporting individual-based and agent-based modeling [@grimm_standard_2006].
+
+### Purpose
+
+The model simulated sex differences in short-term mating behavior. Findings in evolutionary psychology suggest that men have a stronger desire for short-term mating than women [@regan_minimum_1998]. They are also less choosy regarding short-term mating partners [@buss2019mate; @buss_sexual_1993]. This model explores both heterosexual and gay men’s as well as heterosexual and lesbian women’s behavioral outcomes under these assumptions.
+
+The first version of the model simulated short-term mating behaviors among heterosexual individuals, short-term mating and/or long-term relationships were formed only between individuals of the opposite sex. The second version of the model simulated the behaviors among gay men and lesbian women, where individuals only had short-term matings and/or formed long-term relationships with those of the same sex. The key parameters were individuals’ likelihood of engaging in short-term mating and their standards for a short-term partner. We varied those parameters to examine conditions under which sex differences in behavioral outcomes may emerge.
+
+### Entities, state variables, and scales
+
+The model included two types of entities: global and agents. In this model, time and space were modeled as discrete variables. During each time step, agents executed the commands described in the schedule. Space was represented as discrete locations on a two-dimensional 33*33 lattice. All state variables are summarized in Table S1.
+
+### Process overview and scheduling
+
+The model was written using Netlogo 6.2.1 **citation needed**. The model proceeded in discrete time steps, and the entities executed commands in the following order:
+
+\begin{enumerate}
+
+  \item Setting up (Global, only executed once)
+  \begin{enumerate}
+    \item 300 agents were created with all state variables set to the default
+    \item A number of agents were set to either men (number-of-male) or women (300 - number-of-men) with their respective short-term mating likelihood (short-term-likelihood), and standard for a short-term mate (mating-standard) 
+  \end{enumerate}
+  
+  
+  \item Moving (The following procedures were executed by agents unless specified otherwise)
+  
+  \begin{enumerate}
+    \item If not coupled
+    \begin{enumerate}
+      \item If staying within a distance of movement-range from the initial point on both the x and y axis, randomly set their heading and move by a random distance less than movement-range / 2
+      \item If staying outside the distance of movement-range from the initial point on either the x or y axis, head toward the initial point and move by a random distance less than movement-range / 2
+    \end{enumerate}
+    \item If coupled, do not move
+  \end{enumerate}
+  
+  
+  \item Deciding on short-term mating behavior
+  \begin{enumerate}
+    \item Set short-term-mate? to true by short-term-likelihood
+  \end{enumerate}
+  
+  
+  \item Short-term and long-term mating (To avoid double count, only women execute this chunk. This does not affect the model outcomes.)
+  \begin{enumerate}
+    \item If any men here, women randomly select one as the target for short-term mating
+    \begin{enumerate}
+      \item If the target has desirability higher than her mating-standard \& she has desirability higher than the target’s mating-standard \& both of them have short-term-mate? set to true,
+      \begin{enumerate}
+        \item Both of them add 1 to short-term-count
+        \item Both of them add each other’s ID number to their short-term-history if not in it yet
+      \end{enumerate}
+    \end{enumerate}
+    \item If any men here and women are not coupled, women randomly select one as the potential partner for long-term mating
+    \begin{enumerate}
+      \item By long-term-likelihood, they form a long-term relationship, and
+      \begin{enumerate}
+        \item Both of them set coupled? to true
+        \item Both of them set each other as their long-term partner
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+  
+  \item Updating state variables
+  \begin{enumerate}
+    \item Set number-of-partner-short the length of short-term-history
+    \item If short-term-likelihood equals male-/female-short-term-likelihood, set short-term-likelihood to a third of its value
+  \end{enumerate}
+  
+\end{enumerate}
+
+### Design concepts
+
+*Sensing.* Agents were able to detect other agents’ mate value so that they could decide whether to have short-term mating with them.
+
+*Interaction.* Women and men interacted to have short-term mating behaviors or form long-term relationships.
+
+*Stochasticity.* Agents' movement in this model had stochastic elements, with the heading and the movement distance being randomly selected. Whether agents decided to have short-term mating or form long-term relationships was also randomly determined.
+
+*Observation.* Simulations were run for 1,000 time steps. The dependent variables were measured at the end of each run.
+
+\newpage
+
+\noindent \textbf{Supplemental Table 3:} Mean proportion of heterosexual men and women in the mating pool and its standard deviation after 1,000 time steps in the model.
+
+\begingroup
+\renewcommand{\arraystretch}{1.5}
+
+```{r inpool,echo=FALSE}
+results_inpool %>%
+  mutate(across(where(is.numeric), inline_hook)) %>%
+  mutate(
+    condition =
+      c("Same likelihood*Same standard",
+        "Same likelihood*Different standard",
+        "Different likelihood*Same standard",
+        "Different likelihood*Different standard")
+  ) %>%
+  select(-hls) %>% 
+  column_to_rownames("condition") %>%
+  kable(
+    digits = 2, format = "latex", booktabs = TRUE, align = "cccc",
+    row.names = TRUE, col.names = rep(c("M", "SD"), 2)
+    ) %>%
+  row_spec(0, italic = TRUE, align = "c") %>%
+  add_header_above(
+    c(" " = 1,
+      "Men" = 2, "Women" = 2)
+    ) %>%
+  column_spec(1, width = "2.5in") %>%
+  column_spec(c(2, 3, 4, 5), width = "0.8in") %>%
+  footnote(
+    general = "\\\\textit{Note.} \\\\textit{N} = 2,500 in each condition.",
+    general_title = "", escape = FALSE,
+    threeparttable = TRUE, fixed_small_size = TRUE) %>%
+  kable_styling(position = "center", latex_options = "hold_position")
+```
+
+\endgroup
+
+\newpage
+
+## References
+
+<div id="refs"></div>
