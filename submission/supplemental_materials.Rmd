@@ -92,18 +92,18 @@ The first version of the model simulated short-term mating behaviors among heter
 
 ### Entities, state variables, and scales
 
-The model included two types of entities: global and agents. In this model, time and space were modeled as discrete variables. During each time step, agents executed the commands described in the schedule. Space was represented as discrete locations on a two-dimensional 33*33 lattice. All state variables are summarized in Table S1.
+The model included two types of entities: global and agents. In this model, time and space were modeled as discrete variables. During each time step, agents executed the commands described in the schedule. Space was represented as discrete locations on a two-dimensional 33*33 lattice. All state variables are summarized in Supplemental Table 1.
 
 ### Process overview and scheduling
 
-The model was written using Netlogo 6.2.1 **citation needed**. The model proceeded in discrete time steps, and the entities executed commands in the following order:
+The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded in discrete time steps, and the entities executed commands in the following order:
 
 \begin{enumerate}
 
   \item Setting up (Global, only executed once)
   \begin{enumerate}
     \item 300 agents were created with all state variables set to the default
-    \item A number of agents were set to either men (number-of-male) or women (300 - number-of-men) with their respective short-term mating likelihood (short-term-likelihood), and standard for a short-term mate (mating-standard) 
+    \item A number of agents were set to either men (number-of-male) or women (300 – number-of-men) with their respective short-term mating likelihood (short-term-likelihood), and standard for a short-term mate (mating-standard) 
   \end{enumerate}
   
   
