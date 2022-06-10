@@ -1,0 +1,49 @@
+---
+output:
+  pdf_document
+geometry: margin=1.0in
+fontsize: 11pt
+header-includes:
+  - \newcommand{\bcenter}{\begin{center}}
+  - \newcommand{\ecenter}{\end{center}}
+  - \newcommand{\btitlepage}{\begin{titlepage}}
+  - \newcommand{\etitlepage}{\end{titlepage}}
+  - \usepackage{setspace}\doublespacing
+  - \usepackage{helvet}
+  - \renewcommand*\familydefault{\sfdefault}
+---
+
+\btitlepage
+
+\bcenter
+
+\vspace*{20mm}
+
+# An Agent-Based Model of Gender and Sexual Orientation Differences in Short-Term Mating Behaviors as a Result of Mating Preferences {-}
+
+\vspace{20mm}
+
+Yurun Ying^a^^,^^$\dagger$^, Jan Antfolk^b^, Pekka Santtila^a^^,^^c^
+
+^a^ Faculty of Arts and Sciences, NYU Shanghai, Shanghai, China
+
+^b^ Faculty of Arts, Psychology and Theology, Åbo Akademi University, Turku, Finland
+
+^c^ NYU-ECNU Institute for Social Development at NYU Shanghai, Shanghai, China
+
+\ecenter
+
+\vspace{30mm}
+
+^$\dagger$^ To whom correspondence should be addressed: 1555 Century Avenue, Pudong New District, Shanghai, China, 200136. Email: [yurun.ying@nyu.edu](yurun.ying@nyu.edu).
+
+\vspace{5mm}
+
+**Declaration of Competing Interest:** We declare that there are no known competing interests that might have influenced the work reported in this paper.
+
+\vspace{5mm}
+
+Word count: 5103
+
+
+\etitlepage
