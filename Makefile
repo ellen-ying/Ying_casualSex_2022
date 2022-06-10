@@ -49,3 +49,6 @@ submission/supplemental_materials.pdf : submission/supplemental_materials.Rmd\
 data/processed/des_and_test_result.csv\
 submission/reference.bib
 	R -e "rmarkdown::render('submission/supplemental_materials.Rmd')"
+	
+submission/title_page.pdf : submission/title_page.Rmd
+	R -e "rmarkdown::render('submission/title_page.Rmd')"
