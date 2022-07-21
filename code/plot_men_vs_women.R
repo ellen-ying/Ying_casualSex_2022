@@ -2,7 +2,7 @@
 
 # name: plot_men_vs_women.R
 # input: data/processed/casual_sex_sim.csv
-# output: submission/figures/fig1_men_vs_women.pdf
+# output: submission/figures/fig1_men_vs_women.pdf submission/figures/fig1_men_vs_women.jpeg
 # notes: none
 
 # load libraries
@@ -12,7 +12,7 @@ args <- commandArgs(trailingOnly = TRUE)
 #args <- c("data/processed/casual_sex_sim.csv", "submission/figures/fig1_men_vs_women.pdf")
 
 input_file <- args[1]
-output_file <- args[2]
+output_file <- args[-1]
 
 # read file
 casual_tib <- here(input_file) %>% 
@@ -79,4 +79,6 @@ casual_tib %>%
     legend.box.spacing = unit(0, "npc")
   )
 
-ggsave(output_file, width = 5, height = 6)
+ggsave(output_file[1], width = 5, height = 6)
+
+ggsave(output_file[2], width = 5, height = 6)

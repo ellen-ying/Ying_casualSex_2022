@@ -24,17 +24,17 @@ data/processed/compare_hetero_gay_men.csv : code/compare_hetero_gay_men.R\
 data/processed/casual_sex_sim.csv
 	$^ $@
 
-submission/figures/fig1_men_vs_women.pdf : code/plot_men_vs_women.R\
+submission/figures/fig1_men_vs_women.* : code/plot_men_vs_women.R\
 data/processed/casual_sex_sim.csv
-	$^ $@
+	$^ submission/figures/fig1_men_vs_women.pdf submission/figures/fig1_men_vs_women.jpeg
 
-submission/figures/fig2_men_vs_women_inpool.pdf : code/plot_men_vs_women_inpool.R\
+submission/figures/fig2_men_vs_women_inpool.* : code/plot_men_vs_women_inpool.R\
 data/processed/casual_sex_sim.csv
-	$^ $@
+	$^ submission/figures/fig2_men_vs_women_inpool.pdf submission/figures/fig2_men_vs_women_inpool.jpeg
 
-submission/figures/fig3_hetero_vs_gay_men.pdf : code/plot_hetero_vs_gay_men.R\
+submission/figures/fig3_hetero_vs_gay_men.* : code/plot_hetero_vs_gay_men.R\
 data/processed/casual_sex_sim.csv
-	$^ $@
+	$^ submission/figures/fig3_hetero_vs_gay_men.pdf submission/figures/fig3_hetero_vs_gay_men.jpeg
 
 submission/manuscript.pdf : submission/manuscript.Rmd\
 data/processed/des_and_test_result.csv\

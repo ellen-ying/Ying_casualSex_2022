@@ -2,7 +2,7 @@
 
 # name: plot_men_vs_women_inpool.R
 # input: data/processed/casual_sex_sim.csv
-# output: submission/figures/fig1_men_vs_women_inpool.pdf
+# output: submission/figures/fig2_men_vs_women_inpool.pdf submission/figures/fig2_men_vs_women_inpool.jpeg
 # notes: none
 
 # load libraries
@@ -12,7 +12,7 @@ args <- commandArgs(trailingOnly = TRUE)
 #args <- c("data/processed/casual_sex_sim.csv", "submission/figures/fig2_men_vs_women_inpool.pdf")
 
 input_file <- args[1]
-output_file <- args[2]
+output_file <- args[-1]
 
 # read file
 casual_tib <- here(input_file) %>% 
@@ -77,4 +77,6 @@ casual_tib %>%
     legend.text = element_text(size = 12)
   )
 
-ggsave(output_file, width = 9, height = 5)
+ggsave(output_file[1], width = 9, height = 5)
+
+ggsave(output_file[2], width = 9, height = 5)

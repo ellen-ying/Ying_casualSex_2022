@@ -1,16 +1,16 @@
 ---
 output:
-  pdf_document
+  pdf_document:
+    latex_engine: xelatex
+mainfont: Times New Roman
 geometry: margin=1.0in
-fontsize: 11pt
+fontsize: 12pt
 header-includes:
   - \newcommand{\bcenter}{\begin{center}}
   - \newcommand{\ecenter}{\end{center}}
   - \newcommand{\btitlepage}{\begin{titlepage}}
   - \newcommand{\etitlepage}{\end{titlepage}}
   - \usepackage{setspace}\doublespacing
-  - \usepackage{helvet}
-  - \renewcommand*\familydefault{\sfdefault}
 ---
 
 \btitlepage
@@ -36,10 +36,6 @@ Yurun Ying^a^^,^^$\dagger$^, Jan Antfolk^b^, Pekka Santtila^a^^,^^c^
 \vspace{30mm}
 
 ^$\dagger$^ To whom correspondence should be addressed: 1555 Century Avenue, Pudong New District, Shanghai, China, 200136. Email: [yurun.ying@nyu.edu](yurun.ying@nyu.edu).
-
-\vspace{5mm}
-
-**Declaration of Competing Interest:** We declare that there are no known competing interests that might have influenced the work reported in this paper.
 
 \vspace{5mm}
 
