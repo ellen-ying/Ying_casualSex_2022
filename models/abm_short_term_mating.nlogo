@@ -1,3 +1,7 @@
+globals [
+  starting-seed
+]
+
 turtles-own [
   desirability               ;; the turtles' mating desireability
   mating-standard            ;; the desireability standard for a short-term mate
@@ -19,6 +23,8 @@ turtles-own [
 
 to setup
   clear-all
+  set starting-seed new-seed
+  random-seed new-seed
   create-turtles 300 [
     set-basics
   ]
