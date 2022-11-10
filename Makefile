@@ -30,9 +30,17 @@ data/raw/sa_likelihoodS_standardS_Ho-table.csv
 data/processed/des_and_test_result.csv : code/des_and_test_result.R\
 data/processed/casual_sex_sim.csv
 	$^ $@
+	
+data/processed/sa_des_and_test_result.csv : code/des_and_test_result.R\
+data/processed/sa_casual_sex_sim.csv
+	$^ $@
 
 data/processed/compare_hetero_gay_men.csv : code/compare_hetero_gay_men.R\
 data/processed/casual_sex_sim.csv
+	$^ $@
+	
+data/processed/sa_compare_hetero_gay_men.csv : code/compare_hetero_gay_men.R\
+data/processed/sa_casual_sex_sim.csv
 	$^ $@
 
 submission/figures/fig1_men_vs_women.* : code/plot_men_vs_women.R\
