@@ -4,10 +4,12 @@ output:
 geometry: margin=1.0in
 fontsize: 11pt
 numbersections: false
-indent: true
 bibliography: reference.bib
 csl: evolution-and-human-behavior.csl
 header-includes:
+  - \usepackage{lscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
   - \newcommand{\bcenter}{\begin{center}}
   - \newcommand{\ecenter}{\end{center}}
   - \newcommand{\btitlepage}{\begin{titlepage}}
@@ -17,7 +19,6 @@ header-includes:
   - \renewcommand*\familydefault{\sfdefault}
   - \usepackage{booktabs}
   - \usepackage[font=small,labelfont=bf]{caption}
-  - \usepackage{indentfirst}
   - \pagenumbering{gobble}
 ---
 
@@ -26,16 +27,42 @@ library(tidyverse); library(here); library(knitr); library(kableExtra)
 
 options(knitr.kable.NA = '')
 
+# main analyses results
 results_inpool <-
   here("data/processed/des_and_test_result.csv") %>%
   read_csv() %>%
-  rename(hls = homosexual_dlikelihood_dstandard) %>%
+  rename(hls = homosexual_dlikelihood_dstandard_lt) %>%
   mutate(across(.col = c(f_inpool.mean:m_outpool.sd,
                 inpool.conf.low:inpool.conf.high,
                 outpool.conf.low:outpool.conf.high),
                 ~ .x/150)) %>%
   select(hls, m_inpool.mean, m_inpool.sd, f_inpool.mean, f_inpool.sd) %>% 
   filter(str_detect(hls, "^0"))
+
+# sensitivity analyses results
+sa_results <-
+  here("data/processed/sa_des_and_test_result.csv") %>%
+  read_csv() %>%
+  rename(hls = homosexual_dlikelihood_dstandard_lt) %>%
+  mutate(across(.col = c(f_inpool.mean:m_outpool.sd,
+                inpool.conf.low:inpool.conf.high,
+                outpool.conf.low:outpool.conf.high),
+                ~ .x/150)) %>%
+  mutate(across(contains("p.value"), ~format(.x, digits = 2, nsmall = 3))) %>%
+  mutate(across(contains("p.value"), ~ ifelse(.x >= .001,
+                                              str_remove(.x, "^0"),
+                                              "< .001")
+                                              ))
+
+sa_results_hg <-
+  here("data/processed/sa_compare_hetero_gay_men.csv") %>%
+  read_csv() %>%
+  rename(ls = dlikelihood_dstandard_lt) %>%
+  mutate(across(contains("p.value"), ~format(.x, digits = 2, nsmall = 3))) %>%
+  mutate(across(contains("p.value"), ~ ifelse(.x >= .001,
+                                              str_remove(.x, "^0"),
+                                              "< .001")
+                                              ))
 
 # define inline hook
 inline_hook <- function(x) {
@@ -78,7 +105,7 @@ knit_hooks$set(inline = inline_hook)
 
 \bcenter
 
-## Overview, Design Concepts, and Details of the Model
+## A. Overview, Design Concepts, and Details of the Model
 
 \ecenter
 
@@ -148,7 +175,7 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
   \item Updating state variables
   \begin{enumerate}
     \item Set number-of-partner-short the length of short-term-history
-    \item If short-term-likelihood equals male-/female-short-term-likelihood, set short-term-likelihood to a third of its value
+    \item If coupled? is true and short-term-likelihood equals male-/female-short-term-likelihood, set short-term-likelihood to a third of its value
   \end{enumerate}
   
 \end{enumerate}
@@ -165,7 +192,13 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
 
 \newpage
 
-\noindent \textbf{Supplemental Table 3:} Mean proportion of heterosexual men and women in the mating pool and its standard deviation after 1,000 time steps in the model.
+\bcenter
+
+## B. Additional Analyses
+
+\ecenter
+
+\textbf{Supplemental Table B1: Mean proportion of heterosexual men and women in the mating pool and its standard deviation after 1,000 time steps in the model.}
 
 \begingroup
 \renewcommand{\arraystretch}{1.5}
@@ -203,6 +236,346 @@ results_inpool %>%
 \endgroup
 
 \newpage
+
+\bcenter
+
+## C. Sensitivity Analyses
+
+\ecenter
+
+\renewcommand{\tablename}{Supplemental Table}
+\renewcommand{\figurename}{Supplemental Figure}
+
+This section presents the results from sensitivity analyses to complement the main results presented in the paper. We set the parameter long-term-likelihood to 0, 2, 4, 6, 8, and repeated the same set of statistical analyses as the main study for each value. This was to show that the results were robust across different assumptions on the rate of forming long-term relationship. The simulations for sensitivity analyses adopted the same experimental designs but was run only 100 times for each set of parameter setting.
+
+
+### Sensitivity Analysis on Gender Differences in Short-term Mating Behaviors in the Full Population
+
+\newpage
+
+\renewcommand{\thefigure}{C1}
+\begin{figure}[h]
+  \centering
+  \includegraphics{figures/sa_fig1_men_vs_women.pdf}
+  \caption{\textbf{Short-term mating behaviors of men and women for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences.} Line plots summarizing the outcome variables separately for heterosexual individuals and gay men and lesbian women. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. The points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the full population of men and women in the model (\textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150).}
+  \label{fig:men_vs_women}
+\end{figure}
+
+
+```{r table_1, include=FALSE, echo=FALSE}
+# note the following code is tentative and the latex code of the table is mannually editted
+sa_results %>%
+  filter(str_detect(hls, pattern = "^(.)_1_1_(.)")) %>% 
+  mutate(
+    exp_all.d = abs(exp_all.d),
+    partner_all.d = abs(partner_all.d)
+  ) %>%
+  mutate(across(where(is.numeric), inline_hook)) %>%
+  unite(exp_all.conf.low, exp_all.conf.high, sep = ", ",
+        col = "exp_all.conf") %>% 
+  unite(partner_all.conf.low, partner_all.conf.high, sep = ", ",
+        col = "partner_all.conf") %>% 
+  mutate(
+    condition = seq(1, 10, by = 1),
+    exp_all.conf = paste0("[", exp_all.conf, "]"),
+    partner_all.conf = paste0("[", partner_all.conf, "]")
+    ) %>%
+  select(condition, m_exp_all.mean, m_exp_all.sd,
+         f_exp_all.mean, f_exp_all.sd, 
+         exp_all.conf, exp_all.d,
+         m_partner_all.mean, m_partner_all.sd,
+         f_partner_all.mean, f_partner_all.sd, 
+         partner_all.conf, partner_all.d)%>%
+  column_to_rownames("condition") %>%
+  kable(
+    digits = 2, format = "latex", booktabs = TRUE,
+    caption = "\\textbf{Short-term mating behaviors of men and women for 0-8 long-term relationship likelihood when gender differences existed in mating preferences}",
+    row.names = TRUE, 
+    col.names = c(rep(c(rep(c("M", "SD"), 2), "Difference CI [LL, UL]","d"), 2))
+    ) %>%
+  row_spec(0, italic = TRUE, align = "c") %>%
+  add_header_above(
+    c(" " = 1,
+      "Men" = 2, "Women" = 2, " " = 2,
+      "Men" = 2, "Women" = 2, " " = 2)
+    ) %>%
+  add_header_above(
+    c(" " = 1,
+      "Average short-term mating\nexperiences" = 6,
+      "Average short-term\nmates" = 6)
+    ) %>%
+  column_spec(1, width = "0.5in") %>%
+  footnote(
+    general = "\\\\textit{Note.} The means were calculated using the full population of men and women in the model (\\\\textit{N\\\\textsubscript{men}} = \\\\textit{N\\\\textsubscript{women}} = 150).",
+    general_title = "", escape = FALSE,
+    threeparttable = TRUE, fixed_small_size = TRUE) %>% 
+  kable_styling(latex_options = "scale_down")
+```
+
+\newpage
+
+\blandscape
+
+\begingroup
+\renewcommand{\arraystretch}{1.5}
+
+\renewcommand{\thetable}{C1}
+\begin{table}
+
+\caption{\textbf{Short-term mating behaviors of men and women for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences}}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.5in}cccccccccccc}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{6}{c}{Average short-term mating experiences} & \multicolumn{6}{c}{Average short-term mates} \\
+\cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13}
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11}
+\multicolumn{1}{c}{\makecell[c]{Long-term\\Likelihood (\%)}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}}\\
+\midrule
+\multicolumn{13}{l}{\textit{Experiment 1: Heterosexual individuals}} \\
+\multicolumn{1}{c}{0} & 5.94 & 0.61 & 5.94 & 0.61 & {}[–0.17, 0.17] & 0.00 & 3.43 & 0.34 & 3.43 & 0.34 & {}[–0.10, 0.10] & 0.00\\
+\multicolumn{1}{c}{2} & 2.57 & 0.30 & 2.57 & 0.30 & {}[–0.08, 0.08] & 0.00 & 1.65 & 0.17 & 1.65 & 0.17 & {}[–0.05, 0.05] & 0.00\\
+\multicolumn{1}{c}{4} & 1.97 & 0.29 & 1.97 & 0.29 & {}[–0.08, 0.08] & 0.00 & 1.23 & 0.15 & 1.23 & 0.15 & {}[–0.04, 0.04] & 0.00\\
+\multicolumn{1}{c}{6} & 1.66 & 0.27 & 1.66 & 0.27 & {}[–0.07, 0.07] & 0.00 & 1.02 & 0.13 & 1.02 & 0.13 & {}[–0.04, 0.04] & 0.00\\
+\multicolumn{1}{c}{8} & 1.53 & 0.26 & 1.53 & 0.26 & {}[–0.07, 0.07] & 0.00 & 0.88 & 0.12 & 0.88 & 0.12 & {}[–0.03, 0.03] & 0.00\\
+\addlinespace
+\multicolumn{13}{l}{\textit{Experiment 2: Gay men and lesbian women}} \\
+\multicolumn{1}{c}{0} & 8.75 & 0.76 & 1.09 & 0.21 & {}[–7.81, –7.50] & 13.71 & 5.42 & 0.43 & 0.88 & 0.16 & {}[–4.64, –4.46] & 14.04\\
+\multicolumn{1}{c}{2} & 5.02 & 0.48 & 0.61 & 0.16 & {}[–4.51, –4.31] & 12.45 & 3.38 & 0.30 & 0.51 & 0.13 & {}[–2.93, –2.80] & 12.20\\
+\multicolumn{1}{c}{4} & 3.92 & 0.47 & 0.45 & 0.12 & {}[–3.56, –3.37] & 10.04 & 2.67 & 0.28 & 0.37 & 0.09 & {}[–2.35, –2.23] & 10.90\\
+\multicolumn{1}{c}{6} & 3.22 & 0.43 & 0.40 & 0.11 & {}[–2.91, –2.73] & 8.95 & 2.21 & 0.26 & 0.33 & 0.08 & {}[–1.94, –1.83] & 9.95\\
+\multicolumn{1}{c}{8} & 2.88 & 0.39 & 0.36 & 0.09 & {}[–2.60, –2.44] & 8.80 & 1.92 & 0.22 & 0.28 & 0.07 & {}[–1.68, –1.59] & 10.12\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of men and women in the model (\textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\endgroup
+
+\elandscape
+
+\newpage
+
+
+### Sensitivity Analysis on Heterosexual Individuals in the Mating Pool
+
+\renewcommand{\thefigure}{C2}
+\begin{figure}[h]
+  \centering
+  \includegraphics{figures/sa_fig2_men_vs_women_inpool.pdf}
+  \caption{\textbf{Short-term mating behaviors of heterosexual men and women in the mating pool for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences.} Line plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences in the mating pool, and plot (B) shows the average number of short-term mates in the mating pool. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the population of heterosexual men and women who successfully participated in the mating pool (See Table C2 for the mean and standard deviation of the proportion of individuals in the mating pool).}
+  \label{fig:men_vs_women_inpool}
+\end{figure}
+
+\newpage
+
+\blandscape
+
+
+```{r table_2, include=FALSE, echo=FALSE}
+sa_results %>%
+  filter(str_detect(hls, pattern = "^0_1_1")) %>%
+  mutate(
+    inpool.d = abs(inpool.d),
+    exp_ip.d = abs(exp_ip.d),
+    partner_ip.d = abs(partner_ip.d)
+  ) %>%
+  mutate(across(where(is.numeric), inline_hook)) %>%
+  unite(inpool.conf.low, inpool.conf.high, sep = ", ",
+        col = "inpool.conf") %>% 
+  unite(exp_ip.conf.low, exp_ip.conf.high, sep = ", ",
+        col = "exp_ip.conf") %>% 
+  unite(partner_ip.conf.low, partner_ip.conf.high, sep = ", ",
+        col = "partner_ip.conf") %>% 
+  mutate(
+    condition = seq(0, 8, by = 2),
+    inpool.conf = paste0("[", inpool.conf, "]"),
+    exp_ip.conf = paste0("[", exp_ip.conf, "]"),
+    partner_ip.conf = paste0("[", partner_ip.conf, "]")
+    ) %>%
+  select(condition, 
+         m_inpool.mean, m_inpool.sd,
+         f_inpool.mean, f_inpool.sd,
+         inpool.conf, inpool.d,
+         m_exp_ip.mean, m_exp_ip.sd,
+         f_exp_ip.mean, f_exp_ip.sd, 
+         exp_ip.conf, exp_ip.d,
+         m_partner_ip.mean, m_partner_ip.sd,
+         f_partner_ip.mean, f_partner_ip.sd, 
+         partner_ip.conf, partner_ip.d) %>%
+  column_to_rownames("condition") %>%
+  kable(
+    digits = 2, format = "latex", booktabs = TRUE,
+    caption = "\\textbf{Short-term mating behaviors of heterosexual men and women in the mating pool for 0-8 long-term relationship likelihood when gender differences existed in mating preferences}",
+    row.names = TRUE, 
+    col.names = c(rep(c(rep(c("M", "SD"), 2), "Mean difference 95 CI [LL, UL]","d"), 3))
+    ) %>%
+  row_spec(0, italic = TRUE, align = "c") %>%
+  add_header_above(
+    c(" " = 1,
+      "Men" = 2, "Women" = 2, " " = 2,
+      "Men" = 2, "Women" = 2, " " = 2,
+      "Men" = 2, "Women" = 2, " " = 2)
+    ) %>%
+  add_header_above(
+    c(" " = 1,
+      "Mean proportion of individuals in the mating pool" = 6,
+      "Average short-term mating experiences (in-pool)" = 6,
+      "Average short-term mates (in-pool)" = 6)
+    ) %>%
+  column_spec(1, width = "0.5in") %>%
+  footnote(
+    general = "\\\\textit{Note.} \\\\textit{M} = Mean. \\\\textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated with subsamples of men and women who had ever engaged in short-term mating behaviors.",
+    general_title = "", escape = FALSE,
+    threeparttable = TRUE, fixed_small_size = TRUE) %>% 
+  kable_styling(latex_options = "scale_down")
+```
+
+\begingroup
+\renewcommand{\arraystretch}{1.5}
+
+\renewcommand{\thetable}{C2}
+\begin{table}
+
+\caption{\textbf{Proportion and short-term mating behaviors of heterosexual men and women in the mating pool for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences}}
+\centering
+\begin{threeparttable}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.3in}cccccccccccccccccc}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{6}{c}{Mean proportion of individuals in the mating pool} & \multicolumn{6}{c}{Average short-term mating experiences (in-pool)} & \multicolumn{6}{c}{Average short-term mates (in-pool)} \\
+\cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13} \cmidrule(l{3pt}r{3pt}){14-19}
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11} \cmidrule(l{3pt}r{3pt}){14-15} \cmidrule(l{3pt}r{3pt}){16-17}
+\multicolumn{1}{c}{\makecell[c]{Long-term\\Likelihood\\(\%)}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}}\\
+\midrule
+\multicolumn{1}{c}{0} & 0.50 & 0.04 & 0.89 & 0.03 & {}[0.38, 0.40] & 10.79 & 11.87 & 0.67 & 6.67 & 0.59 & {}[–5.37, –5.02] & 8.25 & 6.85 & 0.34 & 3.85 & 0.33 & {}[–3.10, –2.91] & 8.98\\
+\multicolumn{1}{c}{2} & 0.47 & 0.04 & 0.75 & 0.04 & {}[0.26, 0.28] & 7.19 & 5.43 & 0.42 & 3.44 & 0.31 & {}[–2.09, –1.89] & 5.42 & 3.48 & 0.22 & 2.21 & 0.16 & {}[–1.33, –1.22] & 6.52\\
+\multicolumn{1}{c}{4} & 0.44 & 0.04 & 0.65 & 0.05 & {}[0.20, 0.23] & 4.53 & 4.50 & 0.51 & 3.01 & 0.32 & {}[–1.61, –1.37] & 3.51 & 2.81 & 0.22 & 1.88 & 0.14 & {}[–0.98, –0.88] & 4.97\\
+\multicolumn{1}{c}{6} & 0.42 & 0.04 & 0.59 & 0.05 & {}[0.16, 0.19] & 3.67 & 3.96 & 0.48 & 2.80 & 0.33 & {}[–1.28, –1.05] & 2.85 & 2.43 & 0.20 & 1.72 & 0.12 & {}[–0.76, –0.67] & 4.26\\
+\multicolumn{1}{c}{8} & 0.40 & 0.04 & 0.54 & 0.05 & {}[0.14, 0.16] & 3.36 & 3.87 & 0.51 & 2.81 & 0.36 & {}[–1.19, –0.94] & 2.43 & 2.24 & 0.19 & 1.62 & 0.12 & {}[–0.66, –0.57] & 3.92\\
+\bottomrule
+\end{tabular}}
+\begin{tablenotes}
+\small
+\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated with \\ subsamples of men and women who had ever engaged in short-term mating behaviors.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\endgroup
+
+
+\elandscape
+
+\newpage
+
+### Sensitivity Analysis on the Comparison Between Heterosexual and Gay Men
+
+\renewcommand{\thefigure}{C3}
+\begin{figure}[h]
+  \centering
+  \includegraphics{figures/sa_fig3_hetero_vs_gay_men.pdf}
+  \caption{\textbf{Short-term mating behaviors of heterosexual men and gay men for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences.} Line plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the full population of heterosexual men and gay men in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).}
+  \label{fig:hetero_vs_gay}
+\end{figure}
+
+\newpage
+
+\blandscape
+
+```{r table_3, include=FALSE, echo=FALSE}
+sa_results_hg %>%
+  filter(str_detect(ls, pattern = "^1_1")) %>%
+  mutate(
+    exp_all.d = abs(m_exp_all.d),
+    partner_all.d = abs(m_partner_all.d)
+  ) %>%
+  mutate(across(where(is.numeric), inline_hook)) %>%
+  unite(m_exp_all.conf.low, m_exp_all.conf.high, sep = ", ",
+        col = "exp_all.conf") %>% 
+  unite(m_partner_all.conf.low, m_partner_all.conf.high, sep = ", ",
+        col = "partner_all.conf") %>% 
+  mutate(
+    condition = seq(0, 8, by = 2),
+    exp_all.conf = paste0("[", exp_all.conf, "]"),
+    partner_all.conf = paste0("[", partner_all.conf, "]")
+    ) %>%
+  select(condition, 
+         m_exp_all.mean_0, m_exp_all.sd_0,
+         m_exp_all.mean_1, m_exp_all.sd_1, 
+         exp_all.conf, exp_all.d,
+         m_partner_all.mean_0, m_partner_all.sd_0,
+         m_partner_all.mean_1, m_partner_all.sd_1, 
+         partner_all.conf, partner_all.d) %>%
+  column_to_rownames("condition") %>%
+  kable(
+    digits = 2, format = "latex", booktabs = TRUE,
+    caption = "\\textbf{Short-term mating behaviors of heterosexual men and gay men for 0-8 long-term relationship likelihood when gender differences existed in mating preferences}",
+    row.names = TRUE, 
+    col.names = c(rep(c(rep(c("M", "SD"), 2), "Mean difference 95 CI [LL, UL]","d"), 2))
+    ) %>%
+  row_spec(0, italic = TRUE, align = "c") %>%
+  add_header_above(
+    c(" " = 1,
+      "Heterosexual men" = 2, "Gay men" = 2, " " = 2,
+      "Heterosexual men" = 2, "Gay men" = 2, " " = 2)
+    ) %>%
+  add_header_above(
+    c(" " = 1,
+      "Average short-term mating experiences" = 6,
+      "Average short-term mates" = 6)
+    ) %>%
+  column_spec(1, width = "0.5in") %>%
+  footnote(
+    general = "\\\\textit{Note.} \\\\textit{M} = Mean. \\\\textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of heterosexual men and gay men in the model.",
+    general_title = "", escape = FALSE,
+    threeparttable = TRUE, fixed_small_size = TRUE) %>% 
+  kable_styling(latex_options = "scale_down")
+```
+
+\begingroup
+\renewcommand{\arraystretch}{1.5}
+
+\renewcommand{\thetable}{C3}
+
+\begin{table}
+
+\caption{\textbf{Short-term mating behaviors of heterosexual men and gay men for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences}}
+\centering
+\begin{threeparttable}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.5in}cccccccccccc}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{6}{c}{Average short-term mating experiences} & \multicolumn{6}{c}{Average short-term mates} \\
+\cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13}
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{\makecell[c]{Heterosexual\\men}} & \multicolumn{2}{c}{Gay men} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{\makecell[c]{Heterosexual\\men}} & \multicolumn{2}{c}{Gay men} & \multicolumn{2}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11}
+\multicolumn{1}{c}{\makecell[c]{Long-term\\Likelihood\\(\%)}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}}\\
+\midrule
+\multicolumn{1}{c}{0} & 5.94 & 0.61 & 8.75 & 0.76 & {}[–3.00, –2.62] & 4.06 & 3.43 & 0.34 & 5.42 & 0.43 & {}[–2.10, –1.89] & 5.15\\
+\multicolumn{1}{c}{2} & 2.57 & 0.30 & 5.02 & 0.48 & {}[–2.57, –2.34] & 6.17 & 1.65 & 0.17 & 3.38 & 0.30 & {}[–1.80, –1.66] & 6.99\\
+\multicolumn{1}{c}{4} & 1.97 & 0.29 & 3.92 & 0.47 & {}[–2.06, –1.84] & 4.94 & 1.23 & 0.15 & 2.67 & 0.28 & {}[–1.50, –1.38] & 6.35\\
+\multicolumn{1}{c}{6} & 1.66 & 0.27 & 3.22 & 0.43 & {}[–1.67, –1.46] & 4.34 & 1.02 & 0.13 & 2.21 & 0.26 & {}[–1.25, –1.14] & 5.85\\
+\multicolumn{1}{c}{8} & 1.53 & 0.26 & 2.88 & 0.39 & {}[–1.44, –1.25] & 4.01 & 0.88 & 0.12 & 1.92 & 0.22 & {}[–1.08, –0.99] & 5.93\\
+\bottomrule
+\end{tabular}}
+\begin{tablenotes}
+\small
+\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of heterosexual men and gay men in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\endgroup
+
+
+\elandscape
 
 ## References
 

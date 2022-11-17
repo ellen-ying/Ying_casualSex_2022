@@ -44,19 +44,19 @@ casual_tib %>%
   pivot_longer(c(m_exp_all, m_partner_all), values_to = "value",
                names_to = "variable", names_pattern = "m_(.*)") %>% 
   ggplot(aes(x = lt_likelihood, y = value, color = homosexual)) +
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(width = 0.7)) +
+  stat_summary(fun = "mean", geom = "point", size = 2.5,
+               position = position_dodge(width = 0.9)) +
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar", 
-               width = 0.4, size = 0.5, 
-               position = position_dodge(width = 0.7)) +
-  stat_summary(fun = "mean", geom = "line", 
-               position = position_dodge(width = 0.7)) +
+               width = 0.8, size = 0.7, 
+               position = position_dodge(width = 0.9)) +
+  stat_summary(fun = "mean", geom = "line", size = 0.1,
+               position = position_dodge(width = 0.9)) +
   geom_text(
     data = facet_label, aes(label = label, x = x, y = y), 
     hjust = 1, fontface = 2, inherit.aes = FALSE
   ) +
   scale_color_discrete(
-    type = wes_palette("Darjeeling2", 2, type = "discrete"),
+    type = wes_palette("Royal1", 2, type = "discrete"),
     name = "", labels = c("Heterosexual men", "Gay men")
   ) +
   scale_y_continuous(limits = c(0, NA), breaks = seq(0, 8, by = 1)) +
