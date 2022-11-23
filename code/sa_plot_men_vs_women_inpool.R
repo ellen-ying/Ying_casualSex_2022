@@ -59,7 +59,7 @@ casual_tib %>%
   ) +
   scale_color_discrete(
     type = wes_palette("Royal1", 2, type = "discrete"),
-    name = "", labels = c("Women", "Men")
+    name = "", labels = c("Female", "Male")
   ) +
   scale_y_continuous(limits = c(0, NA), breaks = seq(0, 12, by = 2)) +
   labs(x = "Long-term Likelihood (%)", y = NULL) +

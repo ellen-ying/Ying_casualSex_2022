@@ -52,7 +52,7 @@ casual_tib %>%
     ) +
   scale_fill_discrete(
     type = wes_palette("Darjeeling2", 2, type = "discrete"),
-    name = "", labels = c("Heterosexual men", "Gay men")
+    name = "", labels = c("Heterosexual male", "Gay male")
   ) +
   scale_y_continuous(limits = c(0, NA), breaks = seq(0, 4, by = 1)) +
   labs(x = "", y = NULL) +

@@ -54,7 +54,7 @@ casual_tib %>%
   ) +
   scale_fill_discrete(
     type = wes_palette("Darjeeling2", 2, type = "discrete"),
-    name = "", labels = c("Women", "Men")
+    name = "", labels = c("Female", "Male")
   ) +
   scale_y_continuous(limits = c(0, NA), breaks = seq(0, 6, by = 1)) +
   labs(x = "", y = NULL) +

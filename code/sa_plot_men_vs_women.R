@@ -37,7 +37,7 @@ facet_label <-
 y_lab <- labeller(
   homosexual = c(
     `0` = "Experiment 1\nHeterosexual individuals",
-    `1` = "Experiment 2\nGay men and lesbian women"),
+    `1` = "Experiment 2\nGay males and lesbian females"),
   variable = c(
     `exp_all` = "Average number of\nshort-term mating experiences",
     `partner_all` = "Average number of\nshort-term mates")
@@ -62,7 +62,7 @@ casual_tib %>%
             hjust = 0, fontface = 2, inherit.aes = FALSE) +
   scale_color_discrete(
     type = wes_palette("Royal1", 2, type = "discrete"),
-    name = "", labels = c("Women", "Men")
+    name = "", labels = c("Female", "Male")
   ) +
   scale_y_continuous(limits = c(0, NA), breaks = seq(0, 8, by = 1)) +
   labs(x = "Long-term Likelihood (%)", y = NULL) +

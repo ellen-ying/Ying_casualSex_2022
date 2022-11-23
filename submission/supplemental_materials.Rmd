@@ -95,7 +95,7 @@ knit_hooks$set(inline = inline_hook)
 
 \vspace*{30mm}
 
-# Supplemental Materials to "An Agent-Based Model of Gender and Sexual Orientation Differences in Short-Term Mating Behaviors as a Result of Mating Preferences"
+# Supplemental Materials to "An Agent-Based Model of Sex and Sexual Orientation Differences in Short-Term Mating Behaviors as a Result of Mating Preferences"
 
 \ecenter
 
@@ -113,9 +113,9 @@ This description of the model follows the standard ODD protocol of reporting ind
 
 ### Purpose
 
-The model simulated sex differences in short-term mating behavior. Findings in evolutionary psychology suggest that men have a stronger desire for short-term mating than women [@regan_minimum_1998]. They are also less choosy regarding short-term mating partners [@buss2019mate; @buss_sexual_1993]. This model explores both heterosexual and gay men’s as well as heterosexual and lesbian women’s behavioral outcomes under these assumptions.
+The model simulated sex differences in short-term mating behavior. Findings in evolutionary psychology suggest that males have a stronger desire for short-term mating than females [@regan_minimum_1998]. They are also less choosy regarding short-term mating partners [@buss2019mate; @buss_sexual_1993]. This model explores both heterosexual and gay males’ as well as heterosexual and lesbian females' behavioral outcomes under these assumptions.
 
-The first version of the model simulated short-term mating behaviors among heterosexual individuals, short-term mating and/or long-term relationships were formed only between individuals of the opposite sex. The second version of the model simulated the behaviors among gay men and lesbian women, where individuals only had short-term matings and/or formed long-term relationships with those of the same sex. The key parameters were individuals’ likelihood of engaging in short-term mating and their standards for a short-term partner. We varied those parameters to examine conditions under which sex differences in behavioral outcomes may emerge.
+The first version of the model simulated short-term mating behaviors among heterosexual individuals, short-term mating and/or long-term relationships were formed only between individuals of the opposite sex. The second version of the model simulated the behaviors among gay males and lesbian females, where individuals only had short-term matings and/or formed long-term relationships with those of the same sex. The key parameters were individuals’ likelihood of engaging in short-term mating and their standards for a short-term partner. We varied those parameters to examine conditions under which sex differences in behavioral outcomes may emerge.
 
 ### Entities, state variables, and scales
 
@@ -130,7 +130,7 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
   \item Setting up (Global, only executed once)
   \begin{enumerate}
     \item 300 agents were created with all state variables set to the default
-    \item A number of agents were set to either men (number-of-male) or women (300 – number-of-men) with their respective short-term mating likelihood (short-term-likelihood), and standard for a short-term mate (mating-standard) 
+    \item A number of agents were set to either males (number-of-male) or females (300 – number-of-men) with their respective short-term mating likelihood (short-term-likelihood), and standard for a short-term mate (mating-standard) 
   \end{enumerate}
   
   
@@ -152,9 +152,9 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
   \end{enumerate}
   
   
-  \item Short-term and long-term mating (To avoid double count, only women execute this chunk. This does not affect the model outcomes.)
+  \item Short-term and long-term mating (To avoid double count, only females execute this chunk. This does not affect the model outcomes.)
   \begin{enumerate}
-    \item If any men here, women randomly select one as the target for short-term mating
+    \item If any males here, females randomly select one as the target for short-term mating
     \begin{enumerate}
       \item If the target has desirability higher than her mating-standard \& she has desirability higher than the target’s mating-standard \& both of them have short-term-mate? set to true,
       \begin{enumerate}
@@ -162,7 +162,7 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
         \item Both of them add each other’s ID number to their short-term-history if not in it yet
       \end{enumerate}
     \end{enumerate}
-    \item If any men here and women are not coupled, women randomly select one as the potential partner for long-term mating
+    \item If any males here and females are not coupled, females randomly select one as the potential partner for long-term mating
     \begin{enumerate}
       \item By long-term-likelihood, they form a long-term relationship, and
       \begin{enumerate}
@@ -184,7 +184,7 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
 
 *Sensing.* Agents were able to detect other agents’ mate value so that they could decide whether to have short-term mating with them.
 
-*Interaction.* Women and men interacted to have short-term mating behaviors or form long-term relationships.
+*Interaction.* Females and males interacted to have short-term mating behaviors or form long-term relationships.
 
 *Stochasticity.* Agents' movement in this model had stochastic elements, with the heading and the movement distance being randomly selected. Whether agents decided to have short-term mating or form long-term relationships was also randomly determined.
 
@@ -198,7 +198,7 @@ The model was written using Netlogo 6.2.1 [@wilensky_1999]. The model proceeded 
 
 \ecenter
 
-\textbf{Supplemental Table B1: Mean proportion of heterosexual men and women in the mating pool and its standard deviation after 1,000 time steps in the model.}
+\textbf{Supplemental Table B1: Mean proportion of heterosexual males and females in the mating pool and its standard deviation after 1,000 time steps in the model.}
 
 \begingroup
 \renewcommand{\arraystretch}{1.5}
@@ -222,7 +222,7 @@ results_inpool %>%
   row_spec(0, italic = TRUE, align = "c") %>%
   add_header_above(
     c(" " = 1,
-      "Men" = 2, "Women" = 2)
+      "Males" = 2, "Females" = 2)
     ) %>%
   column_spec(1, width = "2.5in") %>%
   column_spec(c(2, 3, 4, 5), width = "0.8in") %>%
@@ -248,16 +248,16 @@ results_inpool %>%
 
 This section presents the results from sensitivity analyses to complement the main results presented in the paper. We set the parameter long-term-likelihood to 0, 2, 4, 6, 8, and repeated the same set of statistical analyses as the main study for each value. This was to show that the results were robust across different assumptions on the rate of forming long-term relationship. The simulations for sensitivity analyses adopted the same experimental designs but was run only 100 times for each set of parameter setting.
 
-
-### Sensitivity Analysis on Gender Differences in Short-term Mating Behaviors in the Full Population
+### Sensitivity Analysis on Sex Differences in Short-term Mating Behaviors in the Full Population
 
 \newpage
+
 
 \renewcommand{\thefigure}{C1}
 \begin{figure}[h]
   \centering
   \includegraphics{figures/sa_fig1_men_vs_women.pdf}
-  \caption{\textbf{Short-term mating behaviors of men and women for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences.} Line plots summarizing the outcome variables separately for heterosexual individuals and gay men and lesbian women. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. The points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the full population of men and women in the model (\textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150).}
+  \caption{\textbf{Short-term mating behaviors of males and females for 0-8\% long-term relationship likelihood when sex differences existed in mating preferences.} Line plots summarizing the outcome variables separately for heterosexual individuals and gay males and lesbian females. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. The points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the full population of males and females in the model (\textit{N\textsubscript{male}} = \textit{N\textsubscript{female}} = 150).}
   \label{fig:men_vs_women}
 \end{figure}
 
@@ -322,14 +322,14 @@ sa_results %>%
 \renewcommand{\thetable}{C1}
 \begin{table}
 
-\caption{\textbf{Short-term mating behaviors of men and women for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences}}
+\caption{\textbf{Short-term mating behaviors of males and females for 0-8\% long-term relationship likelihood when sex differences existed in mating preferences}}
 \centering
 \begin{threeparttable}
 \begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.5in}cccccccccccc}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{6}{c}{Average short-term mating experiences} & \multicolumn{6}{c}{Average short-term mates} \\
 \cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13}
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } \\
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Males} & \multicolumn{2}{c}{Females} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Males} & \multicolumn{2}{c}{Females} & \multicolumn{2}{c}{ } \\
 \cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11}
 \multicolumn{1}{c}{\makecell[c]{Long-term\\Likelihood (\%)}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}}\\
 \midrule
@@ -340,7 +340,7 @@ sa_results %>%
 \multicolumn{1}{c}{6} & 1.66 & 0.27 & 1.66 & 0.27 & {}[–0.07, 0.07] & 0.00 & 1.02 & 0.13 & 1.02 & 0.13 & {}[–0.04, 0.04] & 0.00\\
 \multicolumn{1}{c}{8} & 1.53 & 0.26 & 1.53 & 0.26 & {}[–0.07, 0.07] & 0.00 & 0.88 & 0.12 & 0.88 & 0.12 & {}[–0.03, 0.03] & 0.00\\
 \addlinespace
-\multicolumn{13}{l}{\textit{Experiment 2: Gay men and lesbian women}} \\
+\multicolumn{13}{l}{\textit{Experiment 2: Gay males and lesbian females}} \\
 \multicolumn{1}{c}{0} & 8.75 & 0.76 & 1.09 & 0.21 & {}[–7.81, –7.50] & 13.71 & 5.42 & 0.43 & 0.88 & 0.16 & {}[–4.64, –4.46] & 14.04\\
 \multicolumn{1}{c}{2} & 5.02 & 0.48 & 0.61 & 0.16 & {}[–4.51, –4.31] & 12.45 & 3.38 & 0.30 & 0.51 & 0.13 & {}[–2.93, –2.80] & 12.20\\
 \multicolumn{1}{c}{4} & 3.92 & 0.47 & 0.45 & 0.12 & {}[–3.56, –3.37] & 10.04 & 2.67 & 0.28 & 0.37 & 0.09 & {}[–2.35, –2.23] & 10.90\\
@@ -350,7 +350,7 @@ sa_results %>%
 \end{tabular}
 \begin{tablenotes}
 \small
-\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of men and women in the model (\textit{N\textsubscript{men}} = \textit{N\textsubscript{women}} = 150).
+\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of males and females in the model (\textit{N\textsubscript{male}} = \textit{N\textsubscript{female}} = 150).
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -368,7 +368,7 @@ sa_results %>%
 \begin{figure}[h]
   \centering
   \includegraphics{figures/sa_fig2_men_vs_women_inpool.pdf}
-  \caption{\textbf{Short-term mating behaviors of heterosexual men and women in the mating pool for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences.} Line plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences in the mating pool, and plot (B) shows the average number of short-term mates in the mating pool. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the population of heterosexual men and women who successfully participated in the mating pool (See Table C2 for the mean and standard deviation of the proportion of individuals in the mating pool).}
+  \caption{\textbf{Short-term mating behaviors of heterosexual males and females in the mating pool for 0-8\% long-term relationship likelihood when sex differences existed in mating preferences.} Line plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences in the mating pool, and plot (B) shows the average number of short-term mates in the mating pool. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the population of heterosexual males and females who successfully participated in the mating pool (See Table C2 for the mean and standard deviation of the proportion of individuals in the mating pool).}
   \label{fig:men_vs_women_inpool}
 \end{figure}
 
@@ -442,7 +442,7 @@ sa_results %>%
 \renewcommand{\thetable}{C2}
 \begin{table}
 
-\caption{\textbf{Proportion and short-term mating behaviors of heterosexual men and women in the mating pool for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences}}
+\caption{\textbf{Proportion and short-term mating behaviors of heterosexual males and females in the mating pool for 0-8\% long-term relationship likelihood when sex differences existed in mating preferences}}
 \centering
 \begin{threeparttable}
 \resizebox{\linewidth}{!}{
@@ -450,7 +450,7 @@ sa_results %>%
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{6}{c}{Mean proportion of individuals in the mating pool} & \multicolumn{6}{c}{Average short-term mating experiences (in-pool)} & \multicolumn{6}{c}{Average short-term mates (in-pool)} \\
 \cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13} \cmidrule(l{3pt}r{3pt}){14-19}
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Men} & \multicolumn{2}{c}{Women} & \multicolumn{2}{c}{ } \\
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Males} & \multicolumn{2}{c}{Females} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Males} & \multicolumn{2}{c}{Females} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Males} & \multicolumn{2}{c}{Females} & \multicolumn{2}{c}{ } \\
 \cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11} \cmidrule(l{3pt}r{3pt}){14-15} \cmidrule(l{3pt}r{3pt}){16-17}
 \multicolumn{1}{c}{\makecell[c]{Long-term\\Likelihood\\(\%)}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}}\\
 \midrule
@@ -463,7 +463,7 @@ sa_results %>%
 \end{tabular}}
 \begin{tablenotes}
 \small
-\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated with \\ subsamples of men and women who had ever engaged in short-term mating behaviors.
+\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated with \\ subsamples of males and females who had ever engaged in short-term mating behaviors.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -475,13 +475,13 @@ sa_results %>%
 
 \newpage
 
-### Sensitivity Analysis on the Comparison Between Heterosexual and Gay Men
+### Sensitivity Analysis on the Comparison Between Heterosexual and Gay Males
 
 \renewcommand{\thefigure}{C3}
 \begin{figure}[h]
   \centering
   \includegraphics{figures/sa_fig3_hetero_vs_gay_men.pdf}
-  \caption{\textbf{Short-term mating behaviors of heterosexual men and gay men for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences.} Line plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the full population of heterosexual men and gay men in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).}
+  \caption{\textbf{Short-term mating behaviors of heterosexual males and gay males for 0-8\% long-term relationship likelihood when sex differences existed in mating preferences.} Line plots summarizing the outcome variables. Plot (A) shows the average number of short-term mating experiences, and plot (B) shows the average number of short-term mates. Central points show mean values and whiskers represent standard errors, but the standard errors are small and overlap to form a single bar in some sets of parameter setting. The means were calculated using the full population of heterosexual males and gay mlaes in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).}
   \label{fig:hetero_vs_gay}
 \end{figure}
 
@@ -546,7 +546,7 @@ sa_results_hg %>%
 
 \begin{table}
 
-\caption{\textbf{Short-term mating behaviors of heterosexual men and gay men for 0-8\% long-term relationship likelihood when gender differences existed in mating preferences}}
+\caption{\textbf{Short-term mating behaviors of heterosexual males and gay males for 0-8\% long-term relationship likelihood when sex differences existed in mating preferences}}
 \centering
 \begin{threeparttable}
 \resizebox{\linewidth}{!}{
@@ -554,7 +554,7 @@ sa_results_hg %>%
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{6}{c}{Average short-term mating experiences} & \multicolumn{6}{c}{Average short-term mates} \\
 \cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13}
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{\makecell[c]{Heterosexual\\men}} & \multicolumn{2}{c}{Gay men} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{\makecell[c]{Heterosexual\\men}} & \multicolumn{2}{c}{Gay men} & \multicolumn{2}{c}{ } \\
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{\makecell[c]{Heterosexual\\males}} & \multicolumn{2}{c}{Gay males} & \multicolumn{2}{c}{ } & \multicolumn{2}{c}{\makecell[c]{Heterosexual\\males}} & \multicolumn{2}{c}{Gay males} & \multicolumn{2}{c}{ } \\
 \cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11}
 \multicolumn{1}{c}{\makecell[c]{Long-term\\Likelihood\\(\%)}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{\makecell[c]{Mean difference\\95\%CI [LL, UL]}} & \multicolumn{1}{c}{\makecell[c]{Cohen's \\ \em{d}}}\\
 \midrule
@@ -567,7 +567,7 @@ sa_results_hg %>%
 \end{tabular}}
 \begin{tablenotes}
 \small
-\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of heterosexual men and gay men in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).
+\item \textit{Note.} \textit{M} = Mean. \textit{SD} = Standard deviation. CI = Confidence interval. LL = Lower limit. UL = Upper limit. The means were calculated using the full population of heterosexual males and gay males in the model (\textit{N\textsubscript{hetero}} = \textit{N\textsubscript{gay}} = 150).
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
